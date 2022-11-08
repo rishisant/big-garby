@@ -19,16 +19,26 @@ const Home = () => {
             </div>
             <div id="disc1">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Welcome to the server screen! Here you can view the current inventory, as well as view the current orders. You can also
-                view the current orders, and mark them as complete. Click on the logo in the top-right to return to the home screen.
+                Welcome to Houston Street Subs! Please select the type of user you are. Select which option best suits you. For our developers,
+                please keep in mind that QueryTest is to be used for testing backend functionality. Accessibility is to be used for testing
+                accessibility features and stylesheet implementations. Thank you!
+            </div>
+            <br></br>
+
+            <div id="allDivs">
+                <div class="navbox" onClick={() => navigate('/Manager')}>Manager</div>
+                <div class="navbox" onClick={() => navigate('/Server')}>Server</div>
+                <div class="navbox" onClick={() => navigate('/Customer')}>Customer</div>
+                <div class="navbox" onClick={() => navigate('/QueryTest')}>QueryTest</div>
+                <div class="navbox" onClick={() => navigate('/Accessibility')}>Accessibility</div>
             </div>
 
-            <div className='navigation-buttons'>
+            {/* <div className='navigation-buttons'>
                 <button className='manager-button' onClick={() => navigate('/Manager')}>Manager Screen</button>
                 <button className='server-button' onClick={() => navigate('/Server')}>Server Screen</button>
                 <button className='customer-button' onClick={() => navigate('/Customer')}>Customer Screen</button>
                 <button className='querytest-button' onClick={() => navigate('/QueryTest')}>Query Screen</button>
-            </div>
+            </div> */}
             
             
         </div>

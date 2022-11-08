@@ -22,6 +22,7 @@ const Manager = () => {
                 You can also order an audit of reports, such as Sales Report, Excess Report, and more. Click on the logo in the top-right
                 to return to the home screen.
             </div>
+            <br></br>
 
             {/* Divs */}
             <div id="allDivs">
