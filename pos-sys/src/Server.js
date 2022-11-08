@@ -5,11 +5,15 @@ const Server = () => {
     const navigate = useNavigate();
     return(
         <div>
-            <div>
-                Howdy this is the Server Screen, needs to be edited 
+            {/* Logo in Top Right */}
+            <div id="prelogo">
+                <img id="logo" alt="Click Here to Return Home" onClick={() => navigate(-1)} src={"https://i.imgur.com/Y2jdLdx.png"}></img>
             </div>
-            <div>
-                <button onClick={() => navigate(-1)}>Go Back Home</button>
+            <br></br>
+
+            {/* Manager Div */}
+            <div className = "HomeScreen-top">
+                <header id="ManagerTopText">Server</header>
             </div>
         </div>
     )

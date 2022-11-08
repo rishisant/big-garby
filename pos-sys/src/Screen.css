@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+
 .HomeScreen {
     /* background-image:
     url(
@@ -24,6 +26,7 @@
 
 /* Manager screen beginning */
 #ManagerTopText {
+    font-family: Roboto Slab;
     margin-top: 30px;
     margin-left: 25%;
     margin-right: 25%;
@@ -36,17 +39,57 @@
     font-size: 30px;
 }
 
+#disc1 {
+    font-size: 16px;
+    font-family: Roboto Slab;
+    text-align: left;
+    margin-top: 30px;
+    padding-left: 22.5%;
+    padding-right: 22.5%;
+}
+
+/* Boxes */
+#allDivs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 80px;
+    margin-left: 10%;
+    margin-bottom: 30px;
+    margin-right: 10%;
+}
+
+.box {
+    padding: 180px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 3px dotted black;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.box:hover {
+    background-color: #b0b0b0;
+    cursor: pointer;
+}
+
 #prelogo {
     float: right;
 }
 
 #logo {
+    
     float: right;
     height: 15%;
     width: 15%;
     margin-right: 15px;
     margin-top: 15px;
 }
+
+#logo:hover {
+    cursor: pointer;
+}
+
 /* Manager screen end */
 
 .navigation-buttons{
