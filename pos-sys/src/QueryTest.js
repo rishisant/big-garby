@@ -28,7 +28,11 @@ const QueryTest = () => {
             {/* Divs */}
             
             <div id="sampletext">Query Displayer</div>
-            <div class="tinybox">Display the results from a Query here!</div>
+            <div class="tinybox">Display the results from a Query here!
+                <div id="test">
+                    <p> Name: </p>
+                </div>
+            </div>
 
 
             <div id="sampletext">Table Displayer</div>
