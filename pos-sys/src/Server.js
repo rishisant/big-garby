@@ -15,28 +15,20 @@ const Server = () => {
             <div className = "HomeScreen-top">
                 <header id="ManagerTopText">Server</header>
             </div>
-
-            <div className="container">
-                <h1>Simple Inventory Table</h1>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Category</th>
-                        <th>Unit Price</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                        </tr>
-                    </tbody>
-                </table>
+            <div id="disc1">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Welcome to the server screen! Here you can view the current inventory, as well as view the current orders. You can also
+                view the current orders, and mark them as complete. Click on the logo in the top-right to return to the home screen.
             </div>
+
+            {/* Divs */}
+            <div id="allDivs">
+                <div class="box">BOX 1 (Insert a Table within this space)</div>
+                <div class="box">BOX 2 (Insert a Table within this space)</div>
+                <div class="box">BOX 3 (Insert a Table within this space)</div>
+            </div>
+
+            
         </div>
     )
 };
