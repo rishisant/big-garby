@@ -21,8 +21,12 @@ const QueryTest = () => {
                 Welcome to the query test screen! This is for Matt Senpai. Click on the logo in the top-right to return to the home screen.
                 ありがとう、マット先輩。助かったぞ！
             </div>
+            {/* <div id="test">
+                <p> Name: <%=teammembers[0].student_name%></p>
+            </div> */}
 
             {/* Divs */}
+            
             <div id="sampletext">Query Displayer</div>
             <div class="tinybox">Display the results from a Query here!</div>
 
