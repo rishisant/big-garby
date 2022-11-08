@@ -17,10 +17,10 @@ const Manager = () => {
                 <header id="ManagerTopText">Manager</header>
             </div>
 
-            {/* Return Home Screen */}
+            {/* Return Home Screen
             <div>
                 <button onClick={() => navigate(-1)}>Go Back Home</button>
-            </div>
+            </div> */}
         </div>
     )
 };
