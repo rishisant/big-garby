@@ -9,6 +9,7 @@
     font-size:50px;
     /* background-repeat:no-repeat; */
 }
+
 .HomeScreen-header{
     display: flex;
    text-align: center;
@@ -21,6 +22,7 @@
    background-color: maroon;
 }
 
+/* Manager screen beginning */
 #ManagerTopText {
     margin-top: 30px;
     margin-left: 25%;
@@ -33,6 +35,19 @@
     color: white;
     font-size: 30px;
 }
+
+#prelogo {
+    float: right;
+}
+
+#logo {
+    float: right;
+    height: 15%;
+    width: 15%;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+/* Manager screen end */
 
 .navigation-buttons{
     margin-top: 100px;
