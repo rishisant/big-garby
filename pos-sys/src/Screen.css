@@ -20,6 +20,20 @@
    margin-top: 10px;
    background-color: maroon;
 }
+
+#ManagerTopText {
+    margin-top: 30px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 20px;
+    text-align: center;
+    background-color: maroon;
+    filter: drop-shadow(2px 2px 3px #000);
+    border-radius: 15px;
+    color: white;
+    font-size: 30px;
+}
+
 .navigation-buttons{
     margin-top: 100px;
     margin-left: 150px;

@@ -5,8 +5,9 @@ const Manager = () => {
     const navigate = useNavigate();
     return(
         <div>
-            <div>
-                Howdy this is the Manager Screen
+            <div id="logo"><img src="./src/components/logo_mini1.png"></img></div>
+            <div className = "HomeScreen-top">
+                <header id="ManagerTopText">HSS Manager View</header>
             </div>
             <div>
                 <button onClick={() => navigate(-1)}>Go Back Home</button>
