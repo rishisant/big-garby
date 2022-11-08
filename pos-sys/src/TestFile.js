@@ -20,11 +20,11 @@
 // pool.query('SELECT * FROM product where product_id = 113')
 // .then(res => console.log(res.rows))
 // .finally(() => pool.end());
-
+import res from './dbConnect.js';
 export function linkFTB() {
-    
     console.log("text has been linked\n");
-    const test_text = res.rows;
+    const test_text = "This is a test text";
+    console.log(res.rows[0]['total_price'])
     var btn = document.getElementsByClassName("tinybox")[0];
     btn.innerHTML = test_text;
 } 
