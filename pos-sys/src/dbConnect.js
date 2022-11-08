@@ -1,16 +1,16 @@
-// const {Client} = require('pg');
-// const client = new Client({
-//     user: 'csce315_903_juntunen',
-//     password: '630007600',
-//     host: 'csce-315-db.engr.tamu.edu',
-//     database: 'csce315_903_13',
-//     port: 5432,
-// });
-// console.log('Connecting to database...')
-// client.connect()
-// .then(() => console.log('Connected successfully'))
-// .catch(e => console.log('Connection failed'))
-// .finally(() => client.end());
+const {Client} = require('pg');
+const client = new Client({
+    user: 'csce315_903_juntunen',
+    password: '630007600',
+    host: 'csce-315-db.engr.tamu.edu',
+    database: 'csce315_903_13',
+    port: 5432,
+});
+console.log('Connecting to database...')
+client.connect()
+.then(() => console.log('Connected successfully'))
+.catch(e => console.log(e))
+.finally(() => client.end());
 //---------------------------------
 
 // const Pool = require('pg').Pool
