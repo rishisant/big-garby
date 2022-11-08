@@ -3,10 +3,10 @@ const dotenv = require('dotenv').config();
 
 // Connect to the database
 const pool = new Pool({
-    user: "csce315_903_santhanam",
+    user: "csce315_903_rehmat",
     host: "csce-315-db.engr.tamu.edu",
     database: "csce315_903_13",
-    password: "529009921",
+    password: "528000730",
     port: process.env.PSQL_PORT,
     ssl: {rejectUnauthorized: false}
 });
@@ -15,7 +15,7 @@ const pool = new Pool({
 console.log('Connecting to database...')
 pool.connect();
 // Run a query
-pool.query('SELECT * FROM TeamMembers')
+pool.query('SELECT * FROM orders LIMIT 5')
 .then(res => console.log(res.rows))
 .finally(() => pool.end());
 
