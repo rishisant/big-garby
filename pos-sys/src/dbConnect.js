@@ -1,16 +1,43 @@
-const {Client} = require('pg');
-const client = new Client({
-    user: 'csce315_903_juntunen',
-    password: '630007600',
-    host: 'csce-315-db.engr.tamu.edu',
-    database: 'csce315_903_13',
-    port: 5432,
+const {Client, Pool} = require('pg');
+const dotenv = require('dotenv').config();
+
+// Connect to the database
+const pool = new Pool({
+    user: "csce315_903_santhanam",
+    host: "csce-315-db.engr.tamu.edu",
+    database: "csce315_903_13",
+    password: "529009921",
+    port: process.env.PSQL_PORT,
+    ssl: {rejectUnauthorized: false}
 });
+
+// Now connect to the database
 console.log('Connecting to database...')
-client.connect()
-.then(() => console.log('Connected successfully'))
-.catch(e => console.log(e))
-.finally(() => client.end());
+pool.connect();
+// Run a query
+pool.query('SELECT * FROM TeamMembers')
+.then(res => console.log(res.rows))
+.finally(() => pool.end());
+
+// .then(() => console.log('Connected successfully'))
+// .catch(e => console.log(e))
+// .finally(() => pool.end());
+// console.log(pool.query("SELECT * FROM TeamMembers"));
+
+
+// var client = new Client({
+//     user: 'csce315_903_santhanam',
+//     password: '529009921',
+//     host: 'csce-315-db.engr.tamu.edu',
+//     database: 'csce315_903_13',
+//     port: 5432,
+// });
+
+// console.log('Connecting to database...')
+// client.connect()
+// .then(() => console.log('Connected successfully'))
+// .catch(e => console.log(e))
+// .finally(() => client.end());
 //---------------------------------
 
 // const Pool = require('pg').Pool
