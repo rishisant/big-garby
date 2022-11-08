@@ -1,21 +1,4 @@
-<<<<<<< HEAD
-import React from 'react';
-import {useNavigate} from "react-router-dom"
 
-const Manager = () => {
-    const navigate = useNavigate();
-    return(
-        <div>
-            <div>
-                Howdy this is the Manager Screen
-            </div>
-            <div>
-                <button onClick={() => navigate(-1)}>Go Back Home</button>
-            </div>
-        </div>
-    )
-};
-=======
 import React from 'react';
 import {useNavigate} from "react-router-dom"
 
@@ -33,5 +16,4 @@ const Manager = () => {
         </div>
     )
 };
->>>>>>> 188612ab273438db8646e4ba186b5cda5b8f7438
 export default Manager;
