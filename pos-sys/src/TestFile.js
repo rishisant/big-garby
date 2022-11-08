@@ -4,27 +4,49 @@
 // //const dotenv = require('dotenv').config();
 
 // // Connect to the database
-// const pool = new Pool({
-//     user: "csce315_903_juntunen",
-//     host: "csce-315-db.engr.tamu.edu",
-//     database: "csce315_903_13",
-//     password: "630007600",
-//     port: process.env.PSQL_PORT,
-//     ssl: {rejectUnauthorized: false}
-// });
 
+// import pg from 'pg'
+const {Client, Pool} = require('pg');
+// const Pool = require('pg').Pool
+//const dotenv = require('dotenv').config();
+
+// Connect to the database
+const pool = new Pool({
+    user: "csce315_903_rehmat",
+    host: "csce-315-db.engr.tamu.edu",
+    database: "csce315_903_13",
+    password: "528000730",
+    port: 5432,
+    ssl: {rejectUnauthorized: false}
+});
 // // Now connect to the database
-// console.log('Connecting to database...')
-// pool.connect();
-// // Run a query
-// pool.query('SELECT * FROM product where product_id = 113')
-// .then(res => console.log(res.rows))
-// .finally(() => pool.end());
 
 export function linkFTB() {
-    
     console.log("text has been linked\n");
-    const test_text = res.rows;
+    
+    var test_text = "";
     var btn = document.getElementsByClassName("tinybox")[0];
-    btn.innerHTML = test_text;
+    pool.connect()
+    .then (pool.query('SELECT * FROM orders LIMIT 5')
+    .then(res => {
+        console.log(res.rows);
+        test_text = res.rows;
+        btn.innerHTML = test_text;
+        })
+    .finally(() => pool.end()))
+    .catch(e => console.error(e.stack))
+    // Run a query 
+    // pool.connect()
+    // pool.connect();
+    // pool.query('SELECT * FROM product where product_id = 113')
+    // .then(
+    //     res => {
+    //         console.log(res.rows);
+    //         test_text = res.rows;
+    //         btn.innerHTML = test_text;
+    //     }
+    // )
+    // .finally(() => pool.end());
+    
+    
 } 
