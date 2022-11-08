@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .HomeScreen {
     /* background-image:
     url(
@@ -58,4 +59,80 @@
         "/src/hsslogo.png"
     );
     background-size:contain;
+=======
+.HomeScreen {
+    /* background-image:
+    url(
+        "/Users/nayab/Downloads/pos-system-main/pos-sys/src/hsslogo.png"
+    );
+    background-size:contain; */
+    height: 100vh;
+   
+    font-size:50px;
+    /* background-repeat:no-repeat; */
+}
+.HomeScreen-header{
+    display: flex;
+   text-align: center;
+   justify-content: center;
+   color: black;
+   font-family: "Sofia", sans-serif;
+   border: 2px solid black;
+   border-radius: 25px;
+   margin-top: 10px;
+   background-color: maroon;
+}
+
+#ManagerTopText {
+    margin-top: 30px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 20px;
+    text-align: center;
+    background-color: maroon;
+    filter: drop-shadow(2px 2px 3px #000);
+    border-radius: 15px;
+    color: white;
+    font-size: 30px;
+}
+
+.navigation-buttons{
+    margin-top: 100px;
+    margin-left: 150px;
+    
+}
+.manager-button{
+    height: 500px;
+    width: 500px;
+    margin: 20px;
+    font-size: 50px;
+
+    background-image:
+    url(
+        "/src/hsslogo.png"
+    );
+    background-size:contain;
+}
+.server-button{
+    height: 500px;
+    width: 500px;
+    margin: 20px;
+    font-size: 50px;
+    background-image:
+    url(
+        "/src/hsslogo.png"
+    );
+    background-size:contain;
+}
+.customer-button{
+    height: 500px;
+    width: 500px;
+    margin: 20px;
+    font-size: 50px;
+    background-image:
+    url(
+        "/src/hsslogo.png"
+    );
+    background-size:contain;
+>>>>>>> 188612ab273438db8646e4ba186b5cda5b8f7438
 }
