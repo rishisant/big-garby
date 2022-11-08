@@ -20,6 +20,7 @@ const Server = () => {
                 Welcome to the server screen! Here you can view the current inventory, as well as view the current orders. You can also
                 view the current orders, and mark them as complete. Click on the logo in the top-right to return to the home screen.
             </div>
+            <br></br>
 
             {/* Divs */}
             <div id="allDivs">

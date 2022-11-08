@@ -2,7 +2,7 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom"
 
-const Manager = () => {
+const QueryTest = () => {
     const navigate = useNavigate();
     return(
         <div>
@@ -14,21 +14,22 @@ const Manager = () => {
 
             {/* Manager Div */}
             <div className = "HomeScreen-top">
-                <header id="ManagerTopText">Manager</header>
+                <header id="ManagerTopText">Query Test</header>
             </div>
             <div id="disc1">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Welcome to the manager screen! Here you can edit the list of items served at HSS, as well as view the current inventory.
-                You can also order an audit of reports, such as Sales Report, Excess Report, and more. Click on the logo in the top-right
-                to return to the home screen.
+                Welcome to the query test screen! This is for Matt Senpai. Click on the logo in the top-right to return to the home screen.
+                ありがとう、マット先輩。助かったぞ！
             </div>
-            <br></br>
 
             {/* Divs */}
+            <div id="sampletext">Query Displayer</div>
+            <div class="tinybox">Display the results from a Query here!</div>
+
+
+            <div id="sampletext">Table Displayer</div>
             <div id="allDivs">
-                <div class="box">BOX 1 (Insert a Table within this space)</div>
-                <div class="box">BOX 2 (Insert a Table within this space)</div>
-                <div class="box">BOX 3 (Insert a Table within this space)</div>
+                <div class="box">QUERY TEST TABLE 1 (Insert a Table within this space)</div>
             </div>
 
             {/* Return Home Screen
@@ -38,4 +39,4 @@ const Manager = () => {
         </div>
     )
 };
-export default Manager;
+export default QueryTest;
