@@ -1,5 +1,6 @@
 
 import React from 'react';
+import {linkFTB} from './TestFile.js'
 import {useNavigate} from "react-router-dom"
 
 const QueryTest = () => {
@@ -33,6 +34,9 @@ const QueryTest = () => {
                     <p> Name: </p>
                 </div>
             </div>
+            <div className="tinybox">Display the results from a Query here!</div>
+            <br></br>
+            <button id="samplebutton" onClick={linkFTB}>CLick me if you want to see word change</button>
 
 
             <div id="sampletext">Table Displayer</div>
