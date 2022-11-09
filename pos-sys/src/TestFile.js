@@ -13,8 +13,9 @@
 // Connect to the database
 
 // // Now connect to the database
-
+/*
 const { Pool } = require('pg');
+const express = require('express');
 const app = express();
 
 const pool = new Pool({
@@ -28,20 +29,16 @@ const pool = new Pool({
 
 // var test_text = "";
 pool.connect();
-pool.query('SELECT * FROM orders LIMIT 5')
-.then(res => console.log(res.rows)
-.then(res => test_text = res.rows))
-.finally(() => pool.end());
 
 app.set("view engine", "ejs");
 // app.use(express.static("public"));
 
 app.get('/QueryTest', (req, res) => {
-    orders= [];
+    var orders= [];
 
     pool.query('SELECT * FROM teammembers;')
         .then(res => {
-            for (let i = 0; i < query_res.rowCount; i++){
+            for (let i = 0; i < res.rowCount; i++){
                 orders.push(res.rows[i]);
             }
         });
@@ -76,4 +73,4 @@ process.on('SIGINT', function() {
 //     //     }
 //     // )
 //     // .finally(() => pool.end());
-// }
+// }*/
