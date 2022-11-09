@@ -36,7 +36,7 @@ const QueryTest = () => {
             </div> */}
             <div className="tinybox">Display the results from a Query here!</div>
             <br></br>
-            <button id="samplebutton" onClick={linkFTB}>CLick me if you want to see word change</button>
+            {/* <button id="samplebutton">CLick me if you want to see word change</button> */}
 
 
             <div id="sampletext">Table Displayer</div>
