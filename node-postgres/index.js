@@ -1,55 +1,60 @@
+// const express = require('express')
+// const app = express()
+// const port = 3001
+
+// app.get('/', (req, res) => {
+//   res.status(200).send('Hello World!');
+// })
+
+// app.listen(port, () => {
+//   console.log(`App running on port ${port}.`)
+// })
 const express = require('express')
-const Pool = require('pg').Pool
-// // const app = express()
-// // const port = 3001
+const app = express()
+const port = 3001
 
-// // app.get('/', (req, res) => {
-// //   res.status(200).send('Hello World!');
-// // })
+const product_test = require('./test.js');
 
-// // app.listen(port, () => {
-// //   console.log(`App running on port ${port}.`)
-// // })
-
-
-
-// Create express app
-const app = express();
-const port = 3000;
-// Create pool
-const pool = new Pool({
-    user: process.env.PSQL_USER,
-    host: process.env.PSQL_HOST,
-    database: process.env.PSQL_DATABASE,
-    password: process.env.PSQL_PASSWORD,
-    port: process.env.PSQL_PORT,
-    ssl: {rejectUnauthorized: false}
+app.use(express.json())
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
+  next();
 });
-// Add process hook to shutdown pool
-process.on('SIGINT', function() {
-    pool.end();
-    console.log('Application successfully shutdown');
-    process.exit(0);
-});
-     
-app.set("view engine", "node.js");
+
 app.get('/', (req, res) => {
-    const data = {name: 'Mario'};
-    res.render('index', data);
-});
-app.get('/user', (req, res) => {
-    teammembers = []
-    pool
-        .query('SELECT * FROM teammembers;')
-        .then(query_res => {
-            for (let i = 0; i < query_res.rowCount; i++){
-                teammembers.push(query_res.rows[i]);
-            }
-            const data = {teammembers: teammembers};
-            console.log(teammembers);
-            res.render('user', data);
-        });
-});
+  product_test.getproduct()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
+  console.log(`App running on port ${port}.`)
+})
+
+// app.post('/merchants', (req, res) => {
+//   merchant_model.createMerchant(req.body)
+//   .then(response => {
+//     res.status(200).send(response);
+//   })
+//   .catch(error => {
+//     res.status(500).send(error);
+//   })
+// })
+
+// app.delete('/merchants/:id', (req, res) => {
+//   merchant_model.deleteMerchant(req.params.id)
+//   .then(response => {
+//     res.status(200).send(response);
+//   })
+//   .catch(error => {
+//     res.status(500).send(error);
+//   })
+// })
+// app.listen(port, () => {
+//   console.log(`App running on port ${port}.`)
+// })
