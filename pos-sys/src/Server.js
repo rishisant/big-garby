@@ -18,14 +18,14 @@ function App() {
     function getProduct() {
         fetch('http://localhost:3001')
         .then(res => res.json())
-        .then(res => {
-            console.log(res[0].description);
-        })
-        
-        
-        .then(data => {
-            setProduct(data);
-        });
+        .then(res => 
+            // grab the description value of the first object in the array
+
+            // console.log(res[0].description)
+            document.getElementById("to_test").innerHTML = res[0].description
+
+        )
+
     }
 
 
