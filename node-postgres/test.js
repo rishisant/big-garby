@@ -12,18 +12,27 @@ function test () {
 const getProduct = () => {
     return new Promise(function(resolve, reject) {
         // console.log("getProduct");
-        // pool.connect();
+        const {Client, Pool} = require('pg');
+        const pool = new Pool({
+        user: 'csce315_903_juntunen',
+        host: 'csce-315-db.engr.tamu.edu',
+        database: 'csce315_903_13',
+        password: '630007600',
+        port: 5432,
+        ssl: {rejectUnauthorized: false}
+        });
+        pool.connect();
         // const result = pool.query('SELECT * FROM product;')
         // console.log(result);
         // console.log("got Product");
-        pool.query('SELECT * FROM product', (error, results) => {
+        pool.query('SELECT * FROM product limit 2', (error, results) => {
         if (error) {
             console.log("bad");
             reject(error)
         }
         
         resolve(results.rows);
-        console.log(results.rows);
+        console.log(results.rows[0]['description']);
         
         })
         console.log("here");

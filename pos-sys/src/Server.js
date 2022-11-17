@@ -14,10 +14,10 @@ function App() {
         getProduct();
     }, []);
     function getProduct() {
-        console.log("howdy");
         fetch('http://localhost:3001')
         .then(response => {
-            
+            console.log("this is the respose");
+            console.log(response.rows[0]);
             return response.text();
         })
         .then(data => {
@@ -28,7 +28,9 @@ function App() {
 
     // const Server = () => {
     const navigate = useNavigate();
-        
+    var test = "Test Query1";
+    let query_string = "";
+
     return (
         <div id="homecontainer">
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
@@ -36,7 +38,7 @@ function App() {
             <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>View Orders/Inventory</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Contact Manager</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
-            <div class="homebutton" id="to_test" onClick={getProduct}>Test Query</div>
+            <div class="homebutton" id="to_test" onClick={getProduct}>{test}</div>
             {/* <p class="backtest">;{this.state.apiResponse}</p> */}
             <div id="adminpanel">
                 <panelbig>ADMIN PANEL</panelbig>
