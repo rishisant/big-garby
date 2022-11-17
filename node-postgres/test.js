@@ -25,11 +25,7 @@ const getProduct = () => {
         // const result = pool.query('SELECT * FROM product;')
         // console.log(result);
         // console.log("got Product");
-<<<<<<< HEAD
-        pool.query('SELECT * FROM product;', (error, results) => {
-=======
         pool.query('SELECT * FROM product limit 2', (error, results) => {
->>>>>>> aece0cd76e818ea7a6496ea1d3d48a96381658d2
         if (error) {
             console.log("bad");
             reject(error)
