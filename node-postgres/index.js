@@ -13,7 +13,7 @@ const express = require('express')
 const app = express()
 const port = 3001
 
-const product_test = require('./test.js');
+const product_test = require('./test');
 
 app.use(express.json())
 app.use(function (req, res, next) {
@@ -24,11 +24,15 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-  product_test.getproduct()
+  
+  product_test.getProduct()
+  
   .then(response => {
+    console.log("made query");
     res.status(200).send(response);
   })
   .catch(error => {
+    console.log("did not make query");
     res.status(500).send(error);
   })
 })

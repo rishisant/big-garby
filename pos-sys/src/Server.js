@@ -14,9 +14,10 @@ function App() {
         getProduct();
     }, []);
     function getProduct() {
+        console.log("howdy");
         fetch('http://localhost:3001')
         .then(response => {
-            console.log("howdy");
+            
             return response.text();
         })
         .then(data => {
@@ -36,7 +37,6 @@ function App() {
             <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Contact Manager</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
             <div class="homebutton" id="to_test" onClick={getProduct}>Test Query</div>
-            <div class="textbox" id="admin_textbox">Text Box</div>
             {/* <p class="backtest">;{this.state.apiResponse}</p> */}
             <div id="adminpanel">
                 <panelbig>ADMIN PANEL</panelbig>

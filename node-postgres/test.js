@@ -8,17 +8,25 @@ function test () {
         port: process.env.PSQL_PORT,
         ssl: {rejectUnauthorized: false}
     });
-    console.log("test");
 }
 const getProduct = () => {
     return new Promise(function(resolve, reject) {
-        console.log("getProduct");
-        pool.query('SELECT * FROM prodcut', (error, results) => {
+        // console.log("getProduct");
+        // pool.connect();
+        // const result = pool.query('SELECT * FROM product;')
+        // console.log(result);
+        // console.log("got Product");
+        pool.query('SELECT * FROM product', (error, results) => {
         if (error) {
+            console.log("bad");
             reject(error)
         }
+        
         resolve(results.rows);
+        console.log(results.rows);
+        
         })
+        console.log("here");
     }) 
 }
 
