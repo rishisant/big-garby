@@ -16,7 +16,7 @@ const getProduct = () => {
         // const result = pool.query('SELECT * FROM product;')
         // console.log(result);
         // console.log("got Product");
-        pool.query('SELECT * FROM product', (error, results) => {
+        pool.query('SELECT * FROM product;', (error, results) => {
         if (error) {
             console.log("bad");
             reject(error)
