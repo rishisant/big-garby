@@ -28,8 +28,8 @@ app.get('/', (req, res) => {
   product_test.getProduct()
   
   .then(response => {
-    console.log("made query");
-    res.status(200).send(response);
+    console.log(response);
+    res.send(response);
   })
   .catch(error => {
     console.log(error);

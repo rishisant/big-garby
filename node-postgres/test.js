@@ -31,8 +31,8 @@ const getProduct = () => {
             reject(error)
         }
         
-        resolve(results.rows);
-        console.log(results.rows[0]['description']);
+        resolve(results.rows[0]['description']);
+        //console.log(results.rows[0]['description']);
         
         })
         console.log("here");

@@ -9,17 +9,20 @@ import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
 import React, {useState, useEffect} from 'react';
 function App() {
+    var test = "Test Query1";
+    let query_string = "";
     const [product, setProduct] = useState(false);
     useEffect(() => {
         getProduct();
     }, []);
     function getProduct() {
         fetch('http://localhost:3001')
-        .then(response => {
-            console.log("this is the respose");
-            console.log(response.rows[0]);
-            return response.text();
+        .then(res => res.json())
+        .then(res => {
+            console.log(res[0].description);
         })
+        
+        
         .then(data => {
             setProduct(data);
         });
@@ -28,8 +31,7 @@ function App() {
 
     // const Server = () => {
     const navigate = useNavigate();
-    var test = "Test Query1";
-    let query_string = "";
+    
 
     return (
         <div id="homecontainer">
