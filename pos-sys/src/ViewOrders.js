@@ -17,19 +17,20 @@ const INITIAL_STATE = [
 
 const ViewOrders = () => {
     const [product, setProduct] = useState(false);
+    var t;
     useEffect(() => {
         getProduct();
     }, []);
     function getProduct() {
         fetch('http://localhost:3001')
         .then(res => res.json())
-        .then(res => 
+        .then(res => {
             // grab the description value of the first object in the array
             
             // console.log(res[0].description)
-            document.getElementById("to_test").innerHTML = res[0].description
-        )
-    
+            t = document.getElementById("to_test").innerHTML = res[0].description
+        })
+        return t;
     }
     const [users, setUsers] = useState(INITIAL_STATE)
 
@@ -58,9 +59,9 @@ const ViewOrders = () => {
 
     return (
         <div style={{ margin: '50px' }}>
-        <h1 onLoad={getProduct}>{test}</h1>
+        <h1 >{getProduct}</h1>
         {renderTable()}
-        <div class="homebutton" id="to_test" onLoad={getProduct}>{test}</div>
+        <div class="homebutton" id="to_test">{getProduct}</div>
         </div>
     );
     
