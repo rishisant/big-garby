@@ -1,36 +1,70 @@
-// In Development Page
-// @author: @rishisant
-// @date: 2022-12-11
 
 import {useNavigate} from 'react-router-dom';
-import React from 'react';
-import './BaseStyle.css';
-// import {raise_admin_bar} from './HomeFunctions';
+import React, {useState, useEffect} from 'react';//import './BaseStyle.css';
+import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
 
+var test = "Test Query1";
+let query_string = "";
 
-const InDevelopment = () => {
-    const navigate = useNavigate();
-    
-    return (
-        <div id="homecontainer">
-            <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
-            <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
-            <div id="indevelopmentwaiver">
-                This fucking feature is currently in development. Please check back later. In the meantime, you can use the admin panel to navigate to other pages.
-            </div>
+
+const INITIAL_STATE = [
+  { id: 1, name: 'Tommy', age: 21, hobby: 'coding' },
+  { id: 2, name: 'Anna', age: 19, hobby: 'reading' },
+  { id: 3, name: 'Bobby', age: 16, hobby: 'swimming' },
+  { id: 4, name: 'Lauren', age: 25, hobby: 'running' }
+]
+
+const ViewOrders = () => {
+    const [product, setProduct] = useState(false);
+    useEffect(() => {
+        getProduct();
+    }, []);
+    function getProduct() {
+        fetch('http://localhost:3001')
+        .then(res => res.json())
+        .then(res => 
+            // grab the description value of the first object in the array
             
+            // console.log(res[0].description)
+            document.getElementById("to_test").innerHTML = res[0].description
+        )
+    
+    }
+    const [users, setUsers] = useState(INITIAL_STATE)
 
-            <div id="adminpanel">
-                <panelbig>ADMIN PANEL</panelbig>
-                <img class="admin_button" id="serverlogo" src={require('./components/img/home_transparent.png')} onClick={() => navigate('/')} alt="Home Logo"></img>
-                <paneltext>RETURN HOME</paneltext>
-                {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}
-            </div>
-        
+    const renderUsers = () => {
+        return users.map(({ id, name, age, hobby }) => {
+        return <tr key={id} >
+        <td style={{ padding: '50px', border: '5px solid white' }}>{id}</td>
+        <td style={{ padding: '50px', border: '5px solid white' }}>{name}</td>
+        <td style={{ padding: '50px', border: '5px solid white' }}>{age}</td>
+        <td style={{ padding: '50px', border: '5px solid white' }}>{hobby}</td>
+        </tr>
+        })
+    }
+
+    
+
+    const renderTable = () => {
+        return (
+        <table>
+            <tbody>
+            {renderUsers()}
+            </tbody>
+        </table>
+        )
+    }
+
+    return (
+        <div style={{ margin: '50px' }}>
+        <h1 onLoad={getProduct}>{test}</h1>
+        {renderTable()}
+        <div class="homebutton" id="to_test" onLoad={getProduct}>{test}</div>
         </div>
-        
-    )
+    );
     
 };
-export default InDevelopment;
+export default ViewOrders;
+
+
