@@ -9,6 +9,7 @@ import Accessibility from "./Accessibility";
 import InDevelopment from "./InDevelopment";
 import AuthenticateM from "./AuthenticateM";
 import AuthenticateS from "./AuthenticateS";
+import ViewOrders from "./ViewOrders";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/InDevelopment" element = {<InDevelopment/>}/>
         <Route exact path="/AuthenticateM" element = {<AuthenticateM/>}/>
         <Route exact path="/AuthenticateS" element = {<AuthenticateS/>}/>
+        <Route exact path="/ViewOrders" element = {<ViewOrders/>}/>
       </Routes>
     </BrowserRouter>
     </>

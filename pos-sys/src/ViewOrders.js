@@ -17,7 +17,7 @@ const InDevelopment = () => {
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
             <div id="indevelopmentwaiver">
-                This feature is currently in development. Please check back later. In the meantime, you can use the admin panel to navigate to other pages.
+                This fucking feature is currently in development. Please check back later. In the meantime, you can use the admin panel to navigate to other pages.
             </div>
             
 
