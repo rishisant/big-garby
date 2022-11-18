@@ -32,8 +32,7 @@ const getProduct = () => {
         }
         
         resolve(results.rows);
-        //console.log(results.rows[0]['description']);
-        
+        console.log(results.rows[0]['description']);
         })
         console.log("here");
     }) 
