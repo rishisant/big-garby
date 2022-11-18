@@ -31,7 +31,7 @@ const getProduct = () => {
             reject(error)
         }
         
-        resolve(results.rows[0]['description']);
+        resolve(results.rows);
         //console.log(results.rows[0]['description']);
         
         })
