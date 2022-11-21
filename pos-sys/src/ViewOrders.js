@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';//import './BaseStyle.css';
 import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
+import './TableStyle.css';
 
 var test = "Test Query1";
 let query_string = "";
@@ -59,7 +60,6 @@ const ViewOrders = () => {
 
     var INITIAL_STATE= [];
     
-    
     const [users, setUsers] = useState(INITIAL_STATE)
 
     const renderProducts = () => {
@@ -76,15 +76,23 @@ const ViewOrders = () => {
         <div>
         
         <div style={{ margin: '50px' }}>
-        <h1 id="to_test">here</h1>
         </div>
-        <div id="test_query_string" style={{visibility: 'visible' }}></div>
-        <div id="test_query_string1" style={{visibility: 'visible' }}></div>
-        <table>
+        {/* The strings that we pull for query functions */}
+        <div id="test_query_string" style={{visibility: 'hidden', fontSize: '0.1px' }}></div>
+        <div id="test_query_string1" style={{visibility: 'hidden', fontSize: '0.1px' }}></div>
+
+        <table className="table_s">
+            <thead>
+                <tr>
+                <th>Product</th>
+                <th>Price</th>
+                </tr>
+            </thead>
             <tbody>
             {renderProducts()}
             </tbody>
         </table>
+
         </div>
     );
     
