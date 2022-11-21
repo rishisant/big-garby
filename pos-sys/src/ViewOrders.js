@@ -8,12 +8,7 @@ var test = "Test Query1";
 let query_string = "";
 
 
-const INITIAL_STATE = [
-  { id: 1, name: 'Tommy', age: 21, hobby: 'coding' },
-  { id: 2, name: 'Anna', age: 19, hobby: 'reading' },
-  { id: 3, name: 'Bobby', age: 16, hobby: 'swimming' },
-  { id: 4, name: 'Lauren', age: 25, hobby: 'running' }
-]
+
 
 const ViewOrders = () => {
     const [product, setProduct] = useState(false);
@@ -21,6 +16,7 @@ const ViewOrders = () => {
     useEffect(() => {
         getProduct();
     }, []);
+    
     function getProduct() {
         fetch('http://localhost:3001')
         .then(res => res.json())
@@ -28,19 +24,30 @@ const ViewOrders = () => {
             // grab the description value of the first object in the array
             
             // console.log(res[0].description)
-            t = document.getElementById("to_test").innerHTML = res[0].description
+            document.getElementById("to_test").innerHTML = res[0].description;
+            console.log(res[0].description);
+            return "fuck";
+            
         })
-        return t;
+        
     }
+
+    
+    const INITIAL_STATE = [
+        { id: 1, name:  getProduct(), age: 21, hobby: 'coding' },
+        { id: 2, name: 'Anna', age: 19, hobby: 'reading' },
+        { id: 3, name: 'Bobby', age: 16, hobby: 'swimming' },
+        { id: 4, name: 'Lauren', age: 25, hobby: 'running' }
+      ]
     const [users, setUsers] = useState(INITIAL_STATE)
 
     const renderUsers = () => {
         return users.map(({ id, name, age, hobby }) => {
         return <tr key={id} >
-        <td style={{ padding: '50px', border: '5px solid white' }}>{id}</td>
-        <td style={{ padding: '50px', border: '5px solid white' }}>{name}</td>
-        <td style={{ padding: '50px', border: '5px solid white' }}>{age}</td>
-        <td style={{ padding: '50px', border: '5px solid white' }}>{hobby}</td>
+        <td style={{ padding: '50px', border: '5px solid white', font: '25px white', color: 'white' }}>{id}</td>
+        <td style={{ padding: '50px', border: '5px solid white', font: '25px white', color: 'white' }}>{name}</td>
+        <td style={{ padding: '50px', border: '5px solid white', font: '25px white', color: 'white' }}>{age}</td>
+        <td style={{ padding: '50px', border: '5px solid white', font: '25px white', color: 'white' }}>{hobby}</td>
         </tr>
         })
     }
@@ -59,7 +66,7 @@ const ViewOrders = () => {
 
     return (
         <div style={{ margin: '50px' }}>
-        <h1 >{getProduct}</h1>
+        <h1 id="to_test">{getProduct}</h1>
         {renderTable()}
         <div class="homebutton" id="to_test">{getProduct}</div>
         </div>
