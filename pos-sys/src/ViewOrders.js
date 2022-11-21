@@ -1,5 +1,5 @@
 
-import {useNavigate} from 'react-router-dom';
+
 import React, {useState, useEffect} from 'react';//import './BaseStyle.css';
 import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
@@ -8,17 +8,15 @@ var test = "Test Query1";
 let query_string = "";
 var d = [];
 var p = [];
-var key1 = [1];
 
-const ViewOrders = () => {
+function ViewOrders (){
 
     const [product, setProduct] = useState(false);
     let t = "";
     useEffect(() => {
         getProduct();
-    }, []);
+    }, []); 
     var count = 0;
-    var key_count = 1;
     async function getProduct(test) {
         fetch('http://localhost:3001')
         .then(res => res.json())
@@ -28,12 +26,10 @@ const ViewOrders = () => {
                 if(count == 0){
                     document.getElementById("test_query_string").innerHTML += res[t].description + " | ";
                     document.getElementById("test_query_string1").innerHTML += res[t].price + " | ";
-                    key_count++;
-                    key1.push(key_count);
-                }   
+                }         
             }
             
-            count ++; 
+            count ++;
             if (count  == 1){
                 read_products();  
                 read_price();
@@ -54,7 +50,6 @@ const ViewOrders = () => {
         var pstring1 = document.getElementById("test_query_string1").innerHTML;
         p = pstring1.split(" | ");
         console.log(p);
-        console.log(key1);
     }
 
     var INITIAL_STATE= [];
@@ -73,9 +68,8 @@ const ViewOrders = () => {
     }
 
 
-    
-    
-    return (
+     
+    return (  
         <div>
         
         <div style={{ margin: '50px' }}>
