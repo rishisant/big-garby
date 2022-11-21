@@ -98,9 +98,6 @@ const ViewOrders = () => {
         })
     }
 
-
-    
-    
     return (
         <div>
         
