@@ -16,6 +16,7 @@ function ViewOrders (){
     let t = "";
     useEffect(() => {
         getProduct();
+        //window.location.reload();
     }, []); 
     var count = 0;
     var INITIAL_STATE= [];
@@ -34,7 +35,7 @@ function ViewOrders (){
        // console.log("Price: "+ p);
     }
     async function getProduct() {
-        fetch('http://localhost:3001')
+        fetch('http://localhost:3001') 
         .then(res => res.json())
         .then(res => {
             console.log("About to get info from query");
@@ -58,6 +59,8 @@ function ViewOrders (){
                 //console.log("Initial State: " + INITIAL_STATE);
             }
             console.log("End of getProduct");
+            
+            
         })
     }
 
@@ -68,6 +71,7 @@ function ViewOrders (){
         <td >{name}</td>
         <td >{price}</td>
         {console.log("rendered products")}
+        
         </tr>
          
         })
@@ -103,6 +107,7 @@ function ViewOrders (){
                 </tr>  
             </thead>
             <tbody>
+            
             {renderProducts()}  
             <tr onClick={()=> console.log("clicked")}></tr>
             </tbody>
