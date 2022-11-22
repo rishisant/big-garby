@@ -6,6 +6,7 @@ import './TableStyle.css';
 import {useNavigate} from 'react-router-dom';
 import {raise_admin_bar} from './HomeFunctions';
 
+import { useRowSelect, useTable } from 'react-table';
 var test = "Test Query1";
 let query_string = "";
 var d = [];
@@ -14,67 +15,104 @@ var orders = [];
 function ViewOrders (){
     const navigate = useNavigate();
     const [product, setProduct] = useState(false);
-    let t = "";
-    useEffect(() => {
-        getProduct();
-    }, []); 
+    var t = "";
+    // useEffect(() => {
+    //     getProduct();
+    // }, []); 
     var count = 0;
-    var INITIAL_STATE= [];
+    var INITIAL_STATE = [];
     const [users, setUsers] = useState(INITIAL_STATE)
-    function read_products(){
-        //console.log("getting product in array");
-        var pstring = document.getElementById("test_query_string").innerHTML;
-        d = pstring.split(" | ");
-       /// console.log("Description " + d);
-    }
-    function read_price(){
+    // function read_products(){
+    //     //console.log("getting product in array");
+    //     var pstring = document.getElementById("test_query_string").innerHTML;
+    //     d = pstring.split(" | ");
+    //    /// console.log("Description " + d);
+    // }
+    // function read_price(){
  
-        //console.log("getting price in array");
-        var pstring1 = document.getElementById("test_query_string1").innerHTML;
-        p = pstring1.split(" | ");
-       // console.log("Price: "+ p);
-    }
-    async function getProduct() {
+    //     //console.log("getting price in array");
+    //     var pstring1 = document.getElementById("test_query_string1").innerHTML;
+    //     p = pstring1.split(" | ");
+    //    // console.log("Price: "+ p);
+    // }
+    async function getProduct(t) {
         fetch('http://localhost:3001')
         .then(res => res.json())
-        .then(res => {
+        .then(res => { 
             //console.log("About to get info from query");
             test = res[0].description;
             for (t in res) {
                 if(count == 0){
                     document.getElementById("test_query_string").innerHTML += res[t].description + " | ";
                     document.getElementById("test_query_string1").innerHTML += res[t].price + " | ";
-                    
+                    d.push(res[t].description);
+                    p.push(res[t].price);
                 }         
             }
-            
-            count ++;
-            if (count  == 1){   
-                //console.log("if statement for creation of arrays");
-                read_products();  
-                read_price();
-                for (var i = 0; i < d.length; i++) { 
-                    INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
-                }
-                //console.log("Initial State: " + INITIAL_STATE);
+            for (var i = 0; i < d.length; i++) { 
+                INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
             }
-            //console.log("End of getProduct");
+            count ++;
+            // if (count  == 1){   
+            //     //console.log("if statement for creation of arrays");
+            //     read_products();  
+            //     read_price();
+            //     for (var i = 0; i < d.length; i++) { 
+            //         INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
+            //     }
+            //     //console.log("Initial State: " + INITIAL_STATE);
+            // }
+            console.log(p);
+            console.log(d);
+            console.log("End of getProduct");
             
-        })
-    }
-
-    const renderProducts = () => {
-        //console.log("render products");
-        return users.map(({ id, name, price }) => {
-        return <tr key={id}>
-        <td >{name}</td>
-        <td >{price}</td>
-        {/* {console.log("rendered products")} */}
-        </tr>
-          
         })
     }
     
+    // const renderProducts = () => {
+    //     console.log("render products");
+    //     getProduct();
+    //     return users.map(({ id, name, price }) => {
+    //     {console.log("mapped")}
+    //     return <tr key={id} > 
+    //     <td >{name}</td>  
+    //     <td >{price}</td> 
+    //     {console.log("rendered products")}
+    //     </tr> 
+          
+    //     }) 
+    // }
+    
+    function checkFlag() {
+        if(p.length < 1 || d.length < 1) {
+            console.log("wait");
+           window.setTimeout(checkFlag, 100); /* this checks the flag every 100 milliseconds*/
+        } else {
+          return;
+        }
+    }
+    
+
+    const renderProducts = () =>{
+        console.log("render products");
+        ////var wait = await getProduct();
+        setTimeout(() => console.log(JSON.stringify(p)), 6000);
+        //checkFlag();
+        console.log("waited");
+        console.log("price: " + p);
+        console.log("description: " + d);
+        users.map(({ id, name, price }) => { 
+        {console.log("mapped")} 
+        
+        return <tr key={id} > 
+        <td >{name}</td>  
+        <td >{price}</td>   
+        {console.log("rendered products")}
+        </tr>   
+          
+        }) 
+    } 
+
     // function highlight_row() {
     //     var table = document.getElementById('table_s');
     //     var cells = table.getElementsByTagName('tr');
@@ -103,7 +141,7 @@ function ViewOrders (){
     //     }
 
     // }
-
+    
     return (
         <div>
         {/* {console.log("Website creation begun")} */}
@@ -119,18 +157,18 @@ function ViewOrders (){
                 <th>Product</th>  
                 <th>Price</th> 
                 </tr>  
-            </thead>   
-            <tbody>
-            {renderProducts()}  
-            </tbody>
+            </thead>    
+            <tbody> 
+            {renderProducts()}    
+            </tbody>  
         </table>
-        </div>
+        </div>  
         
-        <div class="homebutton" id="add_product"  >Add to Order</div>
-        {/* {console.log("code done")} */}console.
-        </div>
+        <div className="homebutton" id="add_product"  >Add to Order</div>
+
+        </div>  
     );
-     
+      
 };
 export default ViewOrders;
 
