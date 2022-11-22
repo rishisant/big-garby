@@ -13,6 +13,16 @@ export var products = [];
 export var ingredients = [];
 export var prices = [];
 
+export const print_All_Vals = () => {
+    console.log("\n\nPrinting all values...");
+    for (let i = 0; i < products.length; i++) {
+        console.log("Product: " + products[i] + " Price: " + prices[i]);
+    }
+    for (let i = 0; i < ingredients.length; i++) {
+        console.log("Ingredient: " + ingredients[i]);
+    }
+}
+
 const Home = () => {
     const navigate = useNavigate();
     let vals;
@@ -24,24 +34,38 @@ const Home = () => {
     }, []);
 
     const getProduct = async () => {
+        // remove all values from the arrays
+        products = [];
+        prices = [];
         console.log("Getting products...");
-        const response = await fetch('http://localhost:3000/');
+        const response = await fetch('http://localhost:3001');
+        if (!response.ok) {
+            throw new Error ('HTTP error! status: ' + response.status);
+        }
         vals = await response.json();
         for (let i = 0; i < vals.length; i++) {
             products.push(vals[i].description);
             prices.push(vals[i].price);
-            console.log("Product: " + products[i] + " Price: " + prices[i]);
+            // console.log("Product: " + products[i] + " Price: " + prices[i]);
         }
     }
+    
     const getIngredient = async () => {
+        // remove all elements from ingredients array
+        ingredients = [];
         console.log("Getting ingredients...");
-        const response = await fetch('http://localhost:3000/');
+        const response = await fetch('http://localhost:3001');
+        if (!response.ok) {
+            throw new Error ('HTTP error! status: ' + response.status);
+        }
         vals = await response.json();
         for (let i = 0; i < vals.length; i++) {
             ingredients.push(vals[i].description);
-            console.log("Ingredient: " + ingredients[i]);
+            // console.log("Ingredient: " + ingredients[i]);
         }
     }
+    
+
     
     return (
         <div id="homecontainer">
@@ -50,7 +74,7 @@ const Home = () => {
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
             <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Start Your Order</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
-
+            <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print vals to Console</div>
 
             <div id="adminpanel">
                 <panelbig>ADMIN PANEL</panelbig>
