@@ -16,9 +16,9 @@ function ViewOrders (){
     const navigate = useNavigate();
     const [product, setProduct] = useState(false);
     var t = "";
-    // useEffect(() => {
-    //     getProduct();
-    // }, []); 
+    useEffect(() => {
+        getProduct();
+    }, []); 
     var count = 0;
     var INITIAL_STATE = [];
     const [users, setUsers] = useState(INITIAL_STATE)
@@ -49,9 +49,9 @@ function ViewOrders (){
                     p.push(res[t].price);
                 }         
             }
-            for (var i = 0; i < d.length; i++) { 
+            for (var i = 0; i < d.length; i++) {  
                 INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
-            }
+            }  
             count ++;
             // if (count  == 1){   
             //     //console.log("if statement for creation of arrays");
@@ -83,33 +83,33 @@ function ViewOrders (){
     //     }) 
     // }
     
-    function checkFlag() {
+    function checkFlag() { 
         if(p.length < 1 || d.length < 1) {
             console.log("wait");
            window.setTimeout(checkFlag, 100); /* this checks the flag every 100 milliseconds*/
-        } else {
+        } else { 
           return;
         }
-    }
+    }  
     
-
+ 
     const renderProducts = () =>{
         console.log("render products");
         ////var wait = await getProduct();
-        setTimeout(() => console.log(JSON.stringify(p)), 6000);
+        //setTimeout(() => console.log(JSON.stringify(p)), 6000);
         //checkFlag();
         console.log("waited");
-        console.log("price: " + p);
+        console.log("price: " + p);  
         console.log("description: " + d);
-        users.map(({ id, name, price }) => { 
+        return users.map(({ id, name, price }) => { 
         {console.log("mapped")} 
-        
-        return <tr key={id} > 
+           
+        return <tr key={id} >  
         <td >{name}</td>  
         <td >{price}</td>   
-        {console.log("rendered products")}
+        {console.log("rendered products")}   
         </tr>   
-          
+           
         }) 
     } 
 

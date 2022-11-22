@@ -110,10 +110,10 @@ function ViewOrders (){
         <div style = {{color: 'white'}}> Howdy</div>
         {console.log("code done")}
         </div>
-        </div>
-    );
+        </div> 
+    );  
     
 };
-export default ViewOrders;
+export default ViewOrders;  
 
 
