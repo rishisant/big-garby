@@ -43,9 +43,9 @@ function App() {
     return (
         <div id="homecontainer">
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Enter Order</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/createOrder')}>Enter Order</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ViewOrders')}>View Orders/Inventory</div>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Contact Manager</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/ContactManager')}>Contact Manager</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
             <div class="homebutton" id="to_test" onClick={getProduct}>{test}</div>
             {/* <p class="backtest">;{this.state.apiResponse}</p> */}

@@ -9,6 +9,28 @@ function test () {
         ssl: {rejectUnauthorized: false}
     });
 }
+const addOrder = (order) => {
+    return new Promise (function(resovle, reject){
+        const {Client, Pool} = require('pg');
+        const pool = new Pool({
+        user: 'csce315_903_juntunen',
+        host: 'csce-315-db.engr.tamu.edu',
+        database: 'csce315_903_13',
+        password: '630007600',
+        port: 5432,
+        ssl: {rejectUnauthorized: false}
+        });
+        pool.connect();
+        pool.query('SELECT * FROM product', (error, results) => {
+        if (error) {
+            console.log("bad");
+            reject(error)
+        }
+        resolve(results.rows);
+        console.log(results.rows[0]['description']);
+        })
+    })
+}
 const getProduct = () => {
     return new Promise(function(resolve, reject) {
         // console.log("getProduct");
@@ -39,7 +61,8 @@ const getProduct = () => {
 }
 
 module.exports = {
-    getProduct
+    getProduct,
+    addOrder
 }
 // app.listen(process.env.PSQL_PORT, () => {
 //     console.log(`App server now listening to port ${process.env.PSQL_PORT}`);

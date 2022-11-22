@@ -10,6 +10,8 @@ import InDevelopment from "./InDevelopment";
 import AuthenticateM from "./AuthenticateM";
 import AuthenticateS from "./AuthenticateS";
 import ViewOrders from "./ViewOrders";
+import CreateOrder from "./CreateOrder";
+import ContactManager from "./ContactManager";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route exact path="/AuthenticateM" element = {<AuthenticateM/>}/>
         <Route exact path="/AuthenticateS" element = {<AuthenticateS/>}/>
         <Route exact path="/ViewOrders" element = {<ViewOrders/>}/>
+        <Route exact path="/CreateOrder" element = {<CreateOrder/>}/>
+        <Route exact path="/ContactManager" element = {<ContactManager/>}/>
       </Routes>
     </BrowserRouter>
     </>
