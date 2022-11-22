@@ -41,17 +41,17 @@ function ViewOrders (){
  
         //console.log("getting price in array");
         var pstring1 = document.getElementById("test_query_string1").innerHTML;
-        p = pstring1.split(" | ");  
+        p = pstring1.split(" | ");   
        // console.log("Price: "+ p);
     }
     const getProduct = (t)=> {
-        console.log("started getproduct");
+        console.log("started getproduct");  
         fetch('http://localhost:3001')
         .then(res => res.json())
-        .then(res => { 
+        .then(res => {   
             //console.log("About to get info from query");
             test = res[0].description;
-            for (t in res) {
+            for (t in res) { 
                 if(count == 0){
                     document.getElementById("test_query_string").innerHTML += res[t].description + " | ";
                     document.getElementById("test_query_string1").innerHTML += res[t].price + " | ";

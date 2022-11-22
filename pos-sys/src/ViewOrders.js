@@ -16,6 +16,7 @@ function ViewOrders (){
     let t = "";
     useEffect(() => {
         getProduct();
+        renderProducts();
         //window.location.reload();
     }, []); 
     var count = 0;
@@ -74,8 +75,9 @@ function ViewOrders (){
             }, 3500);
     }
 
-    const renderProducts = () => {
+    const renderProducts = async () => {
         console.log("render products");
+        var wait = await getProduct();
         return users.map(({ id, name, price }) => {
         return <tr key={id}>
         <td >{name}</td>
