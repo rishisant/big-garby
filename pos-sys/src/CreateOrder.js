@@ -20,21 +20,28 @@ function ViewOrders (){
         getProduct();
     }, []); 
     var count = 0;
-    var INITIAL_STATE = [];
+    var INITIAL_STATE = [
+        {id: 1, name: "Pizza" , price: 10},
+        {id: 2, name: "Burger", price: 5},
+        {id: 3, name: "Fries", price: 2},
+        {id: 4, name: "Soda", price: 1},
+        {id: 5, name: "Ice Cream", price: 3},
+        {id: 6, name: "Salad", price: 4},
+    ];
     const [users, setUsers] = useState(INITIAL_STATE)
-    // function read_products(){
-    //     //console.log("getting product in array");
-    //     var pstring = document.getElementById("test_query_string").innerHTML;
-    //     d = pstring.split(" | ");
-    //    /// console.log("Description " + d);
-    // }
-    // function read_price(){
+    function read_products(){
+        //console.log("getting product in array");
+        var pstring = document.getElementById("test_query_string").innerHTML;
+        d = pstring.split(" | ");
+       /// console.log("Description " + d);
+    }
+    function read_price(){
  
-    //     //console.log("getting price in array");
-    //     var pstring1 = document.getElementById("test_query_string1").innerHTML;
-    //     p = pstring1.split(" | ");
-    //    // console.log("Price: "+ p);
-    // }
+        //console.log("getting price in array");
+        var pstring1 = document.getElementById("test_query_string1").innerHTML;
+        p = pstring1.split(" | ");  
+       // console.log("Price: "+ p);
+    }
     async function getProduct(t) {
         fetch('http://localhost:3001')
         .then(res => res.json())
@@ -53,35 +60,22 @@ function ViewOrders (){
                 INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
             }  
             count ++;
-            // if (count  == 1){   
-            //     //console.log("if statement for creation of arrays");
-            //     read_products();  
-            //     read_price();
-            //     for (var i = 0; i < d.length; i++) { 
-            //         INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
-            //     }
-            //     //console.log("Initial State: " + INITIAL_STATE);
-            // }
-            console.log(p);
-            console.log(d);
+            if (count  == 1){   
+                //console.log("if statement for creation of arrays");
+                read_products();  
+                read_price();
+                for (var i = 0; i < d.length; i++) { 
+                    INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
+                }
+                //console.log("Initial State: " + INITIAL_STATE);
+            }
+            // console.log(p);
+            // console.log(d);
             console.log("End of getProduct");
             
         })
     }
     
-    // const renderProducts = () => {
-    //     console.log("render products");
-    //     getProduct();
-    //     return users.map(({ id, name, price }) => {
-    //     {console.log("mapped")}
-    //     return <tr key={id} > 
-    //     <td >{name}</td>  
-    //     <td >{price}</td> 
-    //     {console.log("rendered products")}
-    //     </tr> 
-          
-    //     }) 
-    // }
     
     function checkFlag() { 
         if(p.length < 1 || d.length < 1) {
@@ -96,14 +90,15 @@ function ViewOrders (){
     const renderProducts = () =>{
         console.log("render products");
         ////var wait = await getProduct();
-        //setTimeout(() => console.log(JSON.stringify(p)), 6000);
+        setTimeout(() => console.log(JSON.stringify(p)), 6000);
         //checkFlag();
+        //getProduct();
         console.log("waited");
-        console.log("price: " + p);  
-        console.log("description: " + d);
+        // console.log("price: " + p);  
+        // console.log("description: " + d);
         return users.map(({ id, name, price }) => { 
-        {console.log("mapped")} 
-           
+        {console.log("mapped")}   
+             
         return <tr key={id} >  
         <td >{name}</td>  
         <td >{price}</td>   
