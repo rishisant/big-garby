@@ -117,12 +117,8 @@ function ViewOrders (){
                 </tr>  
             </thead>
             <tbody>
-<<<<<<< HEAD
             
             {renderProducts()}  
-=======
-            {renderAll()}  
->>>>>>> b9c1d2f6ca1f1af9d1698fa24f81ab68770e120d
             <tr onClick={()=> console.log("clicked")}></tr>
             </tbody>
         </table>
