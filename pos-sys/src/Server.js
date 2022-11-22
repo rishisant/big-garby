@@ -18,12 +18,12 @@ function App() {
     function getProduct() {
         fetch('http://localhost:3001')
         .then(res => res.json())
-        .then(res => 
-            // grab the description value of the first object in the array
+        // .then(res => 
+        //     // grab the description value of the first object in the array
             
-            // console.log(res[0].description)
-            document.getElementById("to_test").innerHTML = res[0].description
-        )
+        //     // console.log(res[0].description)
+        //     // document.getElementById("to_test").innerHTML = res[0].description
+        // )
         /*
         Q: why am i getting the error : Uncaught (in promise) SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
         A: because the response is not a JSON object, it is a string. You need to parse it to JSON first.
@@ -47,7 +47,6 @@ function App() {
             <div class="homebutton" id="to_order" onClick={() => navigate('/ViewOrders')}>View Orders/Inventory</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ContactManager')}>Contact Manager</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
-            <div class="homebutton" id="to_test" onClick={getProduct}>{test}</div>
             {/* <p class="backtest">;{this.state.apiResponse}</p> */}
             <div id="adminpanel">
                 <panelbig>ADMIN PANEL</panelbig>
