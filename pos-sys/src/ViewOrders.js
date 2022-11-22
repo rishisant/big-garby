@@ -64,6 +64,16 @@ function ViewOrders (){
         })
     }
 
+    const renderAll = () => {
+        // sets a timeout to render products after the data has been fetched
+        setTimeout(() => {
+            renderProducts();
+        }, 3000);
+        setTimeout(() => {
+            console.log("briggamonoだよ");
+            }, 3500);
+    }
+
     const renderProducts = () => {
         console.log("render products");
         return users.map(({ id, name, price }) => {
@@ -107,8 +117,12 @@ function ViewOrders (){
                 </tr>  
             </thead>
             <tbody>
+<<<<<<< HEAD
             
             {renderProducts()}  
+=======
+            {renderAll()}  
+>>>>>>> b9c1d2f6ca1f1af9d1698fa24f81ab68770e120d
             <tr onClick={()=> console.log("clicked")}></tr>
             </tbody>
         </table>

@@ -12,6 +12,7 @@ import AuthenticateS from "./AuthenticateS";
 import ViewOrders from "./ViewOrders";
 import CreateOrder from "./CreateOrder";
 import ContactManager from "./ContactManager";
+import Test_Click from "./Test_Click";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/ViewOrders" element = {<ViewOrders/>}/>
         <Route exact path="/CreateOrder" element = {<CreateOrder/>}/>
         <Route exact path="/ContactManager" element = {<ContactManager/>}/>
+        <Route exact path="/Test_Click" element = {<Test_Click/>}/>
       </Routes>
     </BrowserRouter>
     </>
