@@ -3,7 +3,7 @@
 // @date: 2022-12-11
 
 import {useNavigate} from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import './BaseStyle.css';
 // import {raise_admin_bar} from './HomeFunctions';
 import {raise_admin_bar} from './HomeFunctions';
@@ -16,33 +16,33 @@ export var prices = [];
 const Home = () => {
     const navigate = useNavigate();
     let vals;
-    // Fetch all data from the database (products/prices)
-    function getProduct() {
-        console.log("Fetching products...");
-        fetch('http://localhost:3001')
-        .then(response => response.json())
-        .then(response => {
-            // iterate through data
-            for (vals in response) {
-                products.push(response[vals].description);
-                prices.push(response[vals].price);
-                console.log("Product: " + response[vals].description + " Price: " + response[vals].price);
-            }
-        });
-    // Fetch all data from the database (ingredients_
+    useEffect(() => {
+        getProduct();
+    }, []);
+    useEffect(() => {
+        getIngredient();
+    }, []);
+
+    const getProduct = async () => {
+        console.log("Getting products...");
+        const response = await fetch('http://localhost:3000/');
+        vals = await response.json();
+        for (let i = 0; i < vals.length; i++) {
+            products.push(vals[i].description);
+            prices.push(vals[i].price);
+            console.log("Product: " + products[i] + " Price: " + prices[i]);
+        }
     }
-    function getIngredient() {
-        console.log("get ingredient called");
-        fetch('http://localhost:3001')
-        .then(response => response.json())
-        .then(response => {
-            // iterate through data
-            for (vals in response) {
-                ingredients.push(response[vals].description);
-                console.log("Ingredient: " + response[vals].description);
-            }
-        });
+    const getIngredient = async () => {
+        console.log("Getting ingredients...");
+        const response = await fetch('http://localhost:3000/');
+        vals = await response.json();
+        for (let i = 0; i < vals.length; i++) {
+            ingredients.push(vals[i].description);
+            console.log("Ingredient: " + ingredients[i]);
+        }
     }
+    
     return (
         <div id="homecontainer">
             {() => getProduct()}
