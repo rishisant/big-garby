@@ -18,6 +18,7 @@ const Home = () => {
     let vals;
     // Fetch all data from the database (products/prices)
     function getProduct() {
+        console.log("Fetching products...");
         fetch('http://localhost:3001')
         .then(response => response.json())
         .then(response => {
@@ -28,8 +29,10 @@ const Home = () => {
                 console.log("Product: " + response[vals].description + " Price: " + response[vals].price);
             }
         });
-    // Fetch all data from the database (ingredients)
+    // Fetch all data from the database (ingredients_
+    }
     function getIngredient() {
+        console.log("get ingredient called");
         fetch('http://localhost:3001')
         .then(response => response.json())
         .then(response => {
@@ -40,13 +43,10 @@ const Home = () => {
             }
         });
     }
-
-    }
-    
     return (
         <div id="homecontainer">
-            {this.getProduct}
-            {this.getIngredient}
+            {() => getProduct()}
+            {() => getIngredient()}
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
             <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Start Your Order</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
