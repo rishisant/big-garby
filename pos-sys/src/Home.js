@@ -8,12 +8,45 @@ import './BaseStyle.css';
 // import {raise_admin_bar} from './HomeFunctions';
 import {raise_admin_bar} from './HomeFunctions';
 
+// The arrays that will store all of our products, ingredients, etc. This will be fetched from the database.
+export var products = [];
+export var ingredients = [];
+export var prices = [];
 
 const Home = () => {
     const navigate = useNavigate();
+    let vals;
+    // Fetch all data from the database (products/prices)
+    function getProduct() {
+        fetch('http://localhost:3001')
+        .then(response => response.json())
+        .then(response => {
+            // iterate through data
+            for (vals in response) {
+                products.push(response[vals].description);
+                prices.push(response[vals].price);
+                console.log("Product: " + response[vals].description + " Price: " + response[vals].price);
+            }
+        });
+    // Fetch all data from the database (ingredients)
+    function getIngredient() {
+        fetch('http://localhost:3001')
+        .then(response => response.json())
+        .then(response => {
+            // iterate through data
+            for (vals in response) {
+                ingredients.push(response[vals].description);
+                console.log("Ingredient: " + response[vals].description);
+            }
+        });
+    }
+
+    }
     
     return (
         <div id="homecontainer">
+            {this.getProduct}
+            {this.getIngredient}
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
             <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Start Your Order</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
