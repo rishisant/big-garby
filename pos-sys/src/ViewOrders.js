@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';//import './BaseStyle.css';
 import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
 import './TableStyle.css';
-import {products, prices, print_All_Vals} from './Home';
+import {ingredients, products, prices, print_All_Vals} from './Home';
 var test = "Test Query1";
 let query_string = "";
 var d = [];
