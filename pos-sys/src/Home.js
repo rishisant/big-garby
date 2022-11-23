@@ -1,4 +1,4 @@
-// Home screen
+ // Home screen
 // @author: @rishisant
 // @date: 2022-12-11
 
@@ -33,7 +33,7 @@ const Home = () => {
         getIngredient();
     }, []);
 
-    const getProduct = async () => {
+    async function getProduct (){
         // remove all values from the arrays
         products = [];
         prices = [];
@@ -48,6 +48,7 @@ const Home = () => {
             prices.push(vals[i].price);
             // console.log("Product: " + products[i] + " Price: " + prices[i]);
         }
+        console.log("Home product: " + products);
     }
     
     const getIngredient = async () => {

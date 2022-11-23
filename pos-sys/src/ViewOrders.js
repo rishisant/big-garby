@@ -4,20 +4,19 @@ import React, {useState, useEffect} from 'react';//import './BaseStyle.css';
 import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
 import './TableStyle.css';
-
+import {products, prices, print_All_Vals} from './Home';
 var test = "Test Query1";
 let query_string = "";
 var d = [];
 var p = [];
-
+print_All_Vals();
+console.log(products, prices);
 function ViewOrders (){
 
     const [product, setProduct] = useState(false);
     let t = "";
     useEffect(() => {
         getProduct();
-        renderProducts();
-        //window.location.reload();
     }, []); 
     var count = 0;
     var INITIAL_STATE= [];
@@ -35,7 +34,7 @@ function ViewOrders (){
         p = pstring1.split(" | ");
        // console.log("Price: "+ p);
     }
-    async function getProduct() {
+    function getProduct() {
         fetch('http://localhost:3001') 
         .then(res => res.json())
         .then(res => {
@@ -65,44 +64,26 @@ function ViewOrders (){
         })
     }
 
-    const renderAll = () => {
-        // sets a timeout to render products after the data has been fetched
-        setTimeout(() => {
-            renderProducts();
-        }, 3000);
-        setTimeout(() => {
-            console.log("briggamonoだよ");
-            }, 3500);
-    }
+    // const renderAll = () => {
+    //     // sets a timeout to render products after the data has been fetched
+    //     setTimeout(() => {
+    //         renderProducts();
+    //     }, 3000);
+    //     setTimeout(() => {
+    //         console.log("briggamonoだよ");
+    //         }, 3500);
+    // }
 
-    const renderProducts = async () => {
-        console.log("render products");
-        var wait = await getProduct();
+    const renderProducts = () => {        
         return users.map(({ id, name, price }) => {
         return <tr key={id}>
         <td >{name}</td>
         <td >{price}</td>
-        {console.log("rendered products")}
-        
         </tr>
-         
         })
     }
     
     return  (
-        <div>
-        {/* <script  src="http://code.jquery.com/jquery-1.9.1.min.js" ></script>
-        <script>
-            $(document).ready(function(){
-            $("#myTable td").click(function() {
-         
-                var column_num = parseInt( $(this).index() ) + 1;
-                var row_num = parseInt( $(this).parent().index() )+1;
-        
-                $("#result").html( "Row_num =" + row_num + "  ,  Rolumn_num ="+ column_num );
-            });
-            });
-        </script> */}
         <div>
         {console.log("Website creation begun")}
         <div style={{ margin: '50px' }}>
@@ -119,16 +100,13 @@ function ViewOrders (){
                 </tr>  
             </thead>
             <tbody>
-            
-            {renderProducts()}  
-            <tr onClick={()=> console.log("clicked")}></tr>
+            {renderProducts()}   
             </tbody>
         </table>
         <div style = {{color: 'white'}}> Howdy</div>
-        {console.log("code done")}
         </div>
-        </div> 
-    );  
+        
+    );   
     
 };
 export default ViewOrders;  
