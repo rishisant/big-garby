@@ -8,28 +8,64 @@ import './ManagerStyle.css';
 // import {raise_admin_bar} from './HomeFunctions';
 import {raise_admin_bar} from './HomeFunctions';
 import React, {useState, useEffect} from 'react';
+
+// The arrays that will store all of our products, ingredients, etc. This will be fetched from the database.
+export var products = [];
+export var ingredients = [];
+export var prices = [];
+
+export const print_All_Vals = () => {
+    console.log("\n\nPrinting all values...");
+    for (let i = 0; i < products.length; i++) {
+        console.log("Product: " + products[i] + " Price: " + prices[i]);
+    }
+    for (let i = 0; i < ingredients.length; i++) {
+        console.log("Ingredient: " + ingredients[i]);
+    }
+}
+
 function App() {
-    var test = "Test Query1";
-    let query_string = "";
-    const [product, setProduct] = useState(false);
-    // useEffect(() => {
-    //     getProduct();
-    // }, []);
-    // function getProduct() {
-    //     fetch('http://localhost:3001')
-    //     .then(res => res.json())
-    //     .then(res => 
-    //     //     // grab the description value of the first object in the array
-            
-    //         // console.log(res[0].description)
-    //         document.getElementById("to_test").innerHTML = res[0].description
-    //     )
-       
+    let vals;
+    useEffect(() => {
+        getProduct();
+    }, []);
+    useEffect(() => {
+        getIngredient();
+    }, []);
 
-    // }
-
-
-    // const Server = () => {
+    async function getProduct (){
+        // remove all values from the arrays
+        products = [];
+        prices = [];
+        console.log("Getting products...");
+        const response = await fetch('http://localhost:3001');
+        if (!response.ok) {
+            throw new Error ('HTTP error! status: ' + response.status);
+        }
+        vals = await response.json();
+        for (let i = 0; i < vals.length; i++) {
+            products.push(vals[i].description);
+            prices.push(vals[i].price);
+            // console.log("Product: " + products[i] + " Price: " + prices[i]);
+        }
+        console.log("Home product: " + products);
+    }
+    
+    const getIngredient = async () => {
+        // remove all elements from ingredients array
+        ingredients = [];
+        console.log("Getting ingredients...");
+        const response = await fetch('http://localhost:3001');
+        if (!response.ok) {
+            throw new Error ('HTTP error! status: ' + response.status);
+        }
+        vals = await response.json();
+        for (let i = 0; i < vals.length; i++) {
+            ingredients.push(vals[i].description);
+            // console.log("Ingredient: " + ingredients[i]);
+        }
+    }
+    
     const navigate = useNavigate();
     
 
@@ -39,6 +75,7 @@ function App() {
             <div class="homebutton" id="to_order" onClick={() => navigate('/createOrder')}>Enter Order</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ViewOrders')}>View Orders/Inventory</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ContactManager')}>Contact Manager</div>
+            <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print all vals Console</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
             {/* <p class="backtest">;{this.state.apiResponse}</p> */}
             <div id="adminpanel">

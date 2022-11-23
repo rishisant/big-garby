@@ -4,14 +4,15 @@ import React, {useState, useEffect} from 'react';//import './BaseStyle.css';
 import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
 import './TableStyle.css';
-import {ingredients, products, prices, print_All_Vals} from './Home';
+import { print_All_Vals, products, ingredients, prices } from './Server';
 var test = "Test Query1";
 let query_string = "";
 var d = [];
 var p = [];
-print_All_Vals();
-console.log(products, prices);
+
 function ViewOrders (){
+    print_All_Vals();
+    console.log(products, prices);
 
     const [product, setProduct] = useState(false);
     let t = "";
@@ -85,6 +86,7 @@ function ViewOrders (){
     
     return  (
         <div>
+            <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print all vals Console</div>
         {console.log("Website creation begun")}
         <div style={{ margin: '50px' }}>
         </div>
