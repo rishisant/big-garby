@@ -112,6 +112,18 @@ function ViewOrders (){
             {}
             </tbody>
         </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ingredients</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
         <div style = {{color: 'white'}}> Howdy</div>
         </div>
         
