@@ -73,7 +73,7 @@ const Home = () => {
             {() => getProduct()}
             {() => getIngredient()}
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>Start Your Order</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/Customer')}>Start Your Order</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
             <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print vals to Console</div>
 
