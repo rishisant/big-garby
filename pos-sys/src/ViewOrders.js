@@ -5,80 +5,15 @@ import './ManagerStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
 import './TableStyle.css';
 import { print_All_Vals, products, ingredients, prices } from './Server';
-var test = "Test Query1";
-let query_string = "";
-var d = [];
-var p = [];
 
 function ViewOrders (){
     //print_All_Vals();
     //console.log(products, prices);
 
     const [product, setProduct] = useState(false);
-    let t = "";
-    // useEffect(() => {
-    //     getProduct();
-    // }, []); 
-    var count = 0;
     var INITIAL_STATE= [];
     const [users, setUsers] = useState(INITIAL_STATE)
-    
-    
-    // function read_products(){
-    //     console.log("getting product in array");
-    //     var pstring = document.getElementById("test_query_string").innerHTML;
-    //     d = pstring.split(" | ");
-    //    /// console.log("Description " + d);
-    // }
-    // function read_price(){
- 
-    //     console.log("getting price in array");
-    //     var pstring1 = document.getElementById("test_query_string1").innerHTML;
-    //     p = pstring1.split(" | ");
-    //    // console.log("Price: "+ p);
-    // }
-    // function getProduct() {
-    //     fetch('http://localhost:3001') 
-    //     .then(res => res.json())
-    //     .then(res => {
-    //         console.log("About to get info from query");
-    //         test = res[0].description;
-    //         for (t in res) {
-    //             if(count == 0){
-    //                 document.getElementById("test_query_string").innerHTML += res[t].description + " | ";
-    //                 document.getElementById("test_query_string1").innerHTML += res[t].price + " | ";
-                    
-    //             }         
-    //         }
-            
-    //         count ++;
-    //         // if (count  == 1){
-    //         //     console.log("if statement for creation of arrays");
-    //         //     // read_products();  
-    //         //     // read_price();
-    //         //     for (var i = 0; i < d.length; i++) {
-    //         //         INITIAL_STATE.push({id: i, name: product[i], price: prices[i]});
-    //         //     }
-    //         //     //console.log("Initial State: " + INITIAL_STATE);
-    //         // }
-    //         console.log("End of getProduct");
-            
-            
-    //     })
-    // }
-
-    // const renderAll = () => {
-    //     // sets a timeout to render products after the data has been fetched
-    //     setTimeout(() => {
-    //         renderProducts();
-    //     }, 3000);
-    //     setTimeout(() => {
-    //         console.log("briggamonoだよ");
-    //         }, 3500);
-    // }
-
     const renderProducts = () => {      
-        
         for (var i = 0; i < products.length; i++) {
             INITIAL_STATE.push({id: i, name: products[i], price: prices[i]});
         }

@@ -35,14 +35,15 @@ const Home = () => {
 
     async function getProduct (){
         // remove all values from the arrays
-        products = [];
-        prices = [];
+        
         console.log("Getting products...");
         const response = await fetch('http://localhost:3001');
         if (!response.ok) {
             throw new Error ('HTTP error! status: ' + response.status);
         }
         vals = await response.json();
+        products = [];
+        prices = [];
         for (let i = 0; i < vals.length; i++) {
             products.push(vals[i].description);
             prices.push(vals[i].price);
