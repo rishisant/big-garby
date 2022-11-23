@@ -23,7 +23,7 @@ export const print_All_Vals = () => {
         console.log("Ingredient: " + ingredients[i]);
     }
 }
-
+var count = 0;
 function App() {
     let vals;
     useEffect(() => {
@@ -35,20 +35,25 @@ function App() {
 
     async function getProduct (){
         // remove all values from the arrays
-        products = [];
-        prices = [];
-        console.log("Getting products...");
-        const response = await fetch('http://localhost:3001');
-        if (!response.ok) {
-            throw new Error ('HTTP error! status: ' + response.status);
+        if (count == 0){
+            
+            console.log("Getting products...");
+            const response = await fetch('http://localhost:3001');
+            if (!response.ok) {
+                throw new Error ('HTTP error! status: ' + response.status);
+            }
+            vals = await response.json();
+            products = [];
+            prices = [];
+            for (let i = 0; i < vals.length; i++) {
+                products.push(vals[i].description);
+                prices.push(vals[i].price);
+                count++;
+                // console.log("Product: " + products[i] + " Price: " + prices[i]);
+            }
+            console.log("Home product: " + products);
         }
-        vals = await response.json();
-        for (let i = 0; i < vals.length; i++) {
-            products.push(vals[i].description);
-            prices.push(vals[i].price);
-            // console.log("Product: " + products[i] + " Price: " + prices[i]);
-        }
-        console.log("Home product: " + products);
+        count++;
     }
     
     const getIngredient = async () => {
