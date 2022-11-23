@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
+import {raise_admin_bar} from './HomeFunctions';
+import {useNavigate} from 'react-router-dom';
 
 const mapStyles = {
   width: "1050px",
@@ -12,6 +14,8 @@ const mapSectionStyles = {
   height: "600px",
   width: "1050px",
 };
+
+
 
 export class MapContainer extends Component {
   state = {
@@ -36,7 +40,10 @@ export class MapContainer extends Component {
     }
   };
 
+  
+
   render() {
+    const navigate = useNavigate();
     return (
       <div>
         <h1>Locations (Please Click on Marker for Address)</h1>
@@ -125,6 +132,15 @@ export class MapContainer extends Component {
             </InfoWindow>
           </Map>
         </div>
+        <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
+            <div class="textbox" id="admin_textbox">Text Box</div>
+            {/* <p class="backtest">;{this.state.apiResponse}</p> */}
+            <div id="adminpanel">
+                <panelbig>ADMIN PANEL</panelbig>
+                <img class="admin_button" id="serverlogo" src={require('./components/img/home_transparent.png')} onClick={() => navigate('/')} alt="Home Logo"></img>
+                <paneltext>RETURN HOME</paneltext>
+                {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}
+            </div>
       </div>
     );
   }
