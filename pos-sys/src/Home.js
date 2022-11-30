@@ -37,7 +37,7 @@ const Home = () => {
         // remove all values from the arrays
         
         console.log("Getting products...");
-        const response = await fetch('http://localhost:3001');
+        const response = await fetch('http://localhost:3001/products');
         if (!response.ok) {
             throw new Error ('HTTP error! status: ' + response.status);
         }
@@ -56,7 +56,7 @@ const Home = () => {
         // remove all elements from ingredients array
         ingredients = [];
         console.log("Getting ingredients...");
-        const response = await fetch('http://localhost:3001');
+        const response = await fetch('http://localhost:3001/ingredients');
         if (!response.ok) {
             throw new Error ('HTTP error! status: ' + response.status);
         }
