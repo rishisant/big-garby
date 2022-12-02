@@ -5,6 +5,7 @@ import './BaseStyle.css';
 import {raise_admin_bar} from './HomeFunctions';
 import Dropdown from 'react-dropdown';
 import {products, prices, ingredients, print_All_Vals} from './Home';
+import {initValsTiny} from './Home';
 
 function Customer ({par}){
     const navigate = useNavigate();
@@ -17,6 +18,8 @@ function Customer ({par}){
     var t = "";
     useEffect(() => {
         getProduct();
+        initValsTiny();
+
     }, []); 
     var count = 0;
     let test;
@@ -97,10 +100,10 @@ function Customer ({par}){
     const[state, setState] = React.useState(INITIAL_STATE);
     return (
         <div>
-        <img id="mainlogo2" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
+        <img id="mainlogo3" style={{cursor: 'pointer'}} src={require('./components/img/hss_transparent.png')} onClick={()=>navigate('/')}  alt="Logo"></img>
         <div className="textbut1">
             The Menu is displayed on the left. Please select from the dropdown menu and click
-            "Add to Order" to add the item to the order.
+            "Add to Order" to add the item to the order. Click on the logo to return home.
         </div>
         {/* {console.log("Website creation begun")} */}
         <div style={{ margin: '50px' }}>
@@ -113,6 +116,9 @@ function Customer ({par}){
                 <div id="tablediv">
                     <table className="table_s" > 
                         <thead>
+                            <tr>
+                            <th colSpan="2">Menu Items</th>
+                            </tr>
                             <tr > 
                             <th>Product</th>  
                             <th>Price</th> 
@@ -129,6 +135,9 @@ function Customer ({par}){
                 <div id="tablediv">
                     <table className="table_s" > 
                         <thead>
+                            <tr>
+                            <th colSpan="2">Current Order</th>
+                            </tr>
                             <tr > 
                             <th>Product</th>  
                             <th>Quantity</th> 

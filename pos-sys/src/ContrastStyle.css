@@ -7,7 +7,7 @@
 
 /* Background Image */
 body {
-    background-image: url("./components/img/subway_photo.png");
+    background-image: url("./components/img/hss_bw.png");
     background-size: cover;
     /* background-size: contain; */
     background-repeat: no-repeat;
@@ -326,7 +326,7 @@ paneltext {
     margin-top: 20px;
     /* margin-bottom: 20px; */
     width: 100%;
-    /* margin-left: %; */
+    margin-left: 35%;
     margin-bottom: 50px;
 }
 

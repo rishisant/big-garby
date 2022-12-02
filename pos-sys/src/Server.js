@@ -8,6 +8,7 @@ import './ManagerStyle.css';
 // import {raise_admin_bar} from './HomeFunctions';
 import {raise_admin_bar} from './HomeFunctions';
 import React, {useState, useEffect} from 'react';
+import {initVals} from './Home';
 
 // The arrays that will store all of our products, ingredients, etc. This will be fetched from the database.
 export var products = [];
@@ -28,6 +29,9 @@ function App() {
     let vals;
     useEffect(() => {
         getProduct();
+    }, []);
+    useEffect(() => {
+        initVals();
     }, []);
     useEffect(() => {
         getIngredient();
@@ -77,16 +81,18 @@ function App() {
     return (
         <div id="homecontainer">
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/createOrder')}>Enter Order</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/EnterOrder')}>Enter Order</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ViewOrders')}>View Orders/Inventory</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ContactManager')}>Contact Manager</div>
-            <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print all vals Console</div>
+            {/* <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print all vals Console</div> */}
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
             {/* <p class="backtest">;{this.state.apiResponse}</p> */}
             <div id="adminpanel">
                 <panelbig>ADMIN PANEL</panelbig>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/query_transparent.png')} onClick={() => navigate('/QueryTest')} alt="Query Logo"></img>
                 <paneltext>QUERY</paneltext>
+                <img class="admin_button" id="accesslogo" src={require('./components/img/accessibility_transparent.png')} onClick={() => navigate('/Accessibility')} alt="Accessibility Logo"></img>
+                <paneltext>ACCESSIBILITY</paneltext>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/home_transparent.png')} onClick={() => navigate('/')} alt="Home Logo"></img>
                 <paneltext>RETURN HOME</paneltext>
                 {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}

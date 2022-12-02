@@ -7,10 +7,15 @@ import React from 'react';
 import './ManagerStyle.css';
 // import {raise_admin_bar} from './HomeFunctions';
 import {raise_admin_bar} from './HomeFunctions';
+import {useState, useEffect} from 'react';
+import {initVals} from './Home';
 
 
 const Manager = () => {
     const navigate = useNavigate();
+    useEffect(() => {
+        initVals();
+    }, []);
     
     return (
         <div id="homecontainer">
@@ -27,6 +32,8 @@ const Manager = () => {
                 <paneltext>SERVER</paneltext>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/query_transparent.png')} onClick={() => navigate('/QueryTest')} alt="Query Logo"></img>
                 <paneltext>QUERY</paneltext>
+                <img class="admin_button" id="accesslogo" src={require('./components/img/accessibility_transparent.png')} onClick={() => navigate('/Accessibility')} alt="Accessibility Logo"></img>
+                <paneltext>ACCESSIBILITY</paneltext>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/home_transparent.png')} onClick={() => navigate('/')} alt="Home Logo"></img>
                 <paneltext>RETURN HOME</paneltext>
                 {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}

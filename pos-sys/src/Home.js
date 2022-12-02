@@ -13,6 +13,91 @@ export var products = [];
 export var ingredients = [];
 export var prices = [];
 
+export const initVals = () => {
+    // grab the background from localstorage and change it
+    var bgim = localStorage.getItem('bgimage');
+    if (bgim == 'default') {
+        // change bg to default
+        document.body.style.backgroundImage = "url('https://i.ibb.co/LP4M3qb/subway-photo.png')";
+    } else {
+        document.body.style.backgroundImage = "url('https://i.ibb.co/zX15NFm/hss-bw.png')";
+    }
+
+    // grab font size
+    var fsize = localStorage.getItem('bigfont');
+    if (fsize=="true") {
+        // console.log('bigfoot is real...\n');
+        // grab all divs and change fontsize to 1.5 em
+        var divs = document.getElementsByTagName('div');
+        for (let i = 0; i < divs.length; i++) {
+            divs[i].style.fontSize = "1.25em";
+        }
+        // grab text inputs and change fontsize to 1.5 em
+        var inputs = document.getElementsByTagName('input');
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].style.fontSize = ".75em";
+        }
+
+        // grab panel text and change fontsize to 1.5 em
+        var paneltext = document.getElementsByTagName('paneltext');
+        for (let i = 0; i < paneltext.length; i++) {
+            paneltext[i].style.fontSize = "1em";
+        }
+
+    } else {
+        // console.log('bigfoot is not real...\n');
+        // // grab all divs and change fontsize to 1.5 em
+        // var divs = document.getElementsByTagName('div');
+        // for (let i = 0; i < divs.length; i++) {
+        //     divs[i].style.fontSize = "1em";
+        // }
+    }
+
+    console.log('initializing fontsize and bgimage');
+}
+export const initValsTiny = () => {
+    // grab the background from localstorage and change it
+    var bgim = localStorage.getItem('bgimage');
+    if (bgim == 'default') {
+        // change bg to default
+        document.body.style.backgroundImage = "url('https://i.ibb.co/LP4M3qb/subway-photo.png')";
+    } else {
+        document.body.style.backgroundImage = "url('https://i.ibb.co/zX15NFm/hss-bw.png')";
+    }
+
+    // grab font size
+    var fsize = localStorage.getItem('bigfont');
+    if (fsize=="true") {
+        // console.log('bigfoot is real...\n');
+        // grab all divs and change fontsize to 1.5 em
+        var divs = document.getElementsByTagName('div');
+        for (let i = 0; i < divs.length; i++) {
+            divs[i].style.fontSize = "1.08em";
+        }
+        // grab text inputs and change fontsize to 1.5 em
+        var inputs = document.getElementsByTagName('input');
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].style.fontSize = ".75em";
+        }
+
+        // grab panel text and change fontsize to 1.5 em
+        var paneltext = document.getElementsByTagName('paneltext');
+        for (let i = 0; i < paneltext.length; i++) {
+            paneltext[i].style.fontSize = "1em";
+        }
+
+    } else {
+        // console.log('bigfoot is not real...\n');
+        // // grab all divs and change fontsize to 1.5 em
+        // var divs = document.getElementsByTagName('div');
+        // for (let i = 0; i < divs.length; i++) {
+        //     divs[i].style.fontSize = "1em";
+        // }
+    }
+
+    console.log('initializing fontsize and bgimage');
+}
+
 export const print_All_Vals = () => {
     console.log("\n\nPrinting all values...");
     for (let i = 0; i < products.length; i++) {
@@ -28,6 +113,7 @@ const Home = () => {
     let vals;
     useEffect(() => {
         getProduct();
+        initVals();
     }, []);
     useEffect(() => {
         getIngredient();
@@ -37,7 +123,9 @@ const Home = () => {
         // remove all values from the arrays
         
         console.log("Getting products...");
-        const response = await fetch('http://localhost:3001/products');
+        // NOTE for matt: Change this back to localhost:3001/products ...
+        // CHANGED IT BECAUSE NEED TO COMPILE SITE
+        const response = await fetch('http://localhost:3001');
         if (!response.ok) {
             throw new Error ('HTTP error! status: ' + response.status);
         }
@@ -54,9 +142,11 @@ const Home = () => {
     
     const getIngredient = async () => {
         // remove all elements from ingredients array
+        // NOTE for matt: Change this back to localhost:3001/ingredients ...
+        // CHANGED IT BECAUSE NEED TO COMPILE SITE
         ingredients = [];
         console.log("Getting ingredients...");
-        const response = await fetch('http://localhost:3001/ingredients');
+        const response = await fetch('http://localhost:3001');
         if (!response.ok) {
             throw new Error ('HTTP error! status: ' + response.status);
         }
@@ -71,12 +161,12 @@ const Home = () => {
     
     return (
         <div id="homecontainer">
+            
             {() => getProduct()}
             {() => getIngredient()}
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
             <div class="homebutton" id="to_order" onClick={() => navigate('/Customer')}>Start Your Order</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
-            <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print vals to Console</div>
 
             <div id="adminpanel">
                 <panelbig>ADMIN PANEL</panelbig>
@@ -84,13 +174,19 @@ const Home = () => {
                 <paneltext>MANAGER</paneltext>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/server_transparent.png')} onClick={() => navigate('/AuthenticateS')} alt="Server Logo"></img>
                 <paneltext>SERVER</paneltext>
-                <img class="admin_button" id="serverlogo" src={require('./components/img/query_transparent.png')} onClick={() => navigate('/QueryTest')} alt="Query Logo"></img>
+                <img class="admin_button" id="querylogo" src={require('./components/img/query_transparent.png')} onClick={() => navigate('/QueryTest')} alt="Query Logo"></img>
                 <paneltext>QUERY</paneltext>
+                <img class="admin_button" id="accesslogo" src={require('./components/img/accessibility_transparent.png')} onClick={() => navigate('/Accessibility')} alt="Accessibility Logo"></img>
+                <paneltext>ACCESSIBILITY</paneltext>
 
                 <img class="admin_button" id="serverlogo" src={require('./components/img/googlemaps.png')} onClick={() => navigate('/GoogleMaps')} alt="Map Logo"></img>
                 <paneltext>LOCATIONS</paneltext>
+
+                
                 {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}
             </div>
+
+            
         </div>
         
     )

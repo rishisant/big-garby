@@ -4,18 +4,21 @@
 
 import {useNavigate} from 'react-router-dom';
 import React from 'react';
+import {useEffect} from 'react';
 import './AuthenticateStyle.css';
 // import {raise_admin_bar} from './HomeFunctions';
 // import {raise_admin_bar} from './HomeFunctions';
 import {raise_admin_bar} from './HomeFunctions';
 // import { isValidServer } from './AuthentScript';
-import { print_All_Vals, products, ingredients, prices } from './Home';
+import { print_All_Vals, products, ingredients, prices, initVals } from './Home';
 
 const AuthenticateS = () => {
     const navigate = useNavigate();
     var validusers = ["rishisanthanam", "mattjuntunen", "esbenegholm", "nayabrehmat"];
     var validpass = ["529009921", "630007600", "228007063", "528000730"];   
-
+    useEffect(() => {
+        initVals();
+    }, []);
     // create a function to check if the user is valid using validusers[i] and validpass[i]
     // if the user is valid, then navigate to the manager page
     // if the user is not valid, then print "Invalid Manager" to the console
@@ -47,12 +50,14 @@ const AuthenticateS = () => {
             </div>
             <div id="authspacer"></div>
             <div class="homebutton" id="check_auth" onClick={isValidServer}>Authenticate</div>
-            <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print all vals Console</div>
+            {/* <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print all vals Console</div> */}
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
 
 
             <div id="adminpanel">
                 <panelbig>ADMIN PANEL</panelbig>
+                <img class="admin_button" id="accesslogo" src={require('./components/img/accessibility_transparent.png')} onClick={() => navigate('/Accessibility')} alt="Accessibility Logo"></img>
+                <paneltext>ACCESSIBILITY</paneltext>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/home_transparent.png')} onClick={() => navigate('/')} alt="Home Logo"></img>
                 <paneltext>RETURN HOME</paneltext>
                 {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}

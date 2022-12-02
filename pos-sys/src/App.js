@@ -14,6 +14,7 @@ import CreateOrder from "./CreateOrder";
 import ContactManager from "./ContactManager";
 import Test_Click from "./Test_Click";
 import GoogleMaps from "./GoogleMaps";
+import EnterOrder from "./EnterOrder";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/ContactManager" element = {<ContactManager/>}/>
         <Route exact path="/Test_Click" element = {<Test_Click/>}/>
         <Route exact path="/GoogleMaps" element = {<GoogleMaps/>}/>
+        <Route exact path="/EnterOrder" element = {<EnterOrder/>}/>
       </Routes>
     </BrowserRouter>
     </>
