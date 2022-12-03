@@ -6,8 +6,12 @@ import {raise_admin_bar} from './HomeFunctions';
 import Dropdown from 'react-dropdown';
 import {products, prices, ingredients, print_All_Vals} from './Home';
 import {initValsTiny} from './Home';
-
+var total_price = 0.0;
+var completedOrder = [];
 function Customer ({par}){
+    var id_order = 0;
+    
+    var to_add = "howdy";
     const navigate = useNavigate();
     const [x, setX] = useState(false);
     // note to matt: modify this options -> with the items in the database just as you did with the table
@@ -23,21 +27,11 @@ function Customer ({par}){
     }, []); 
     var count = 0;
     let test;
+    var current_order = [];
     var INITIAL_STATE = [];
+    const [order, setOrder] = useState(current_order);
     const [products, setProducts] = useState(INITIAL_STATE)
-    function read_products(){
-        //console.log("getting product in array");
-        var pstring = document.getElementById("test_query_string").innerHTML;
-        var d = pstring.split(" | ");
-       /// console.log("Description " + d);
-    }
-    function read_price(){
-
-        //console.log("getting price in array");
-        var pstring1 = document.getElementById("test_query_string1").innerHTML;
-        var p = pstring1.split(" | ");   
-       // console.log("Price: "+ p);
-    }
+    
     const getProduct = async (t)=> {
         console.log("started getproduct");  
         fetch('http://localhost:3001')
@@ -50,28 +44,6 @@ function Customer ({par}){
                 }
                 setProducts(newProducts);
             
-            // for (t in res) { 
-            //     if(count == 0){
-            //         document.getElementById("test_query_string").innerHTML += res[t].description + " | ";
-            //         document.getElementById("test_query_string1").innerHTML += res[t].price + " | ";
-            //         d.push(res[t].description);
-            //         p.push(res[t].price);
-            //     }         
-            // }
-            // for (var i = 0; i < d.length; i++) {  
-            //     INITIAL_STATE.push({id: i, name: d[i], price: p[i]});
-            // }  
-            // if (count  == 1){   
-            //     //console.log("if statement for creation of arrays");
-            //     read_products();  
-            //     read_price(); 
-            //     for (var i = 0; i < d.length; i++) {  
-            //         INITIAL_STATE.push({id1: i, name: d[i], price: p[i]}); 
-            //     }
-            //     //console.log("Initial State: " + INITIAL_STATE);
-            // }
-            // console.log(p);
-            // console.log(d);
             console.log("End of getProduct");
 
         })
@@ -79,14 +51,69 @@ function Customer ({par}){
 
     }
 
+    const add_to_order = () => {
+        
+        var desc = document.getElementById("selected_item").innerHTML;
+        var item_price = (document.getElementById("selected_price").innerHTML);
+        var quant = parseFloat(document.getElementById("quantfield").value);
+        let new_order = [ ...order];
+        item_price = parseFloat(item_price.substring(1));
+        // console.log("item price: " + item_price);
+        // console.log("quant: " + quant);
+        // console.log("total price: " + total_price);
+        new_order.push({id: id_order, name: desc, quantity: quant, price: (parseFloat(item_price)*parseFloat(quant)).toFixed(2)});
+        setOrder(new_order);
+        id_order++;
+        total_price = parseFloat(total_price) + parseFloat(quant * (item_price));
+        //console.log("total price2: " + total_price);
+        total_price = total_price.toFixed(2);
+        document.getElementById("total_price_div").innerHTML = "$" + String(total_price);
+        for (var i = 0; i < quant; i++){
+            completedOrder.push({name: desc, quantity: quant, price: (parseFloat(item_price)*parseFloat(quant)).toFixed(2)});
+        }
+        //console.log("completed order: " + completedOrder);
+
+    }
+
+    const queryOrder = () => {
+        console.log("started queryOrder");
+        console.log(completedOrder);
+    }
+
+    const onClickAddItem = (name, price) => {
+        // event.preventDefault();
+        
+        var div = document.getElementById("selected_item")
+        div.innerHTML = name;
+        var div2 = document.getElementById("selected_price")
+        div2.innerHTML = "$" + String(price);
+        console.log(name, price)
+    }
+
+    const renderOrders = () =>{
+
+        
+        return order.map(({ id, name, quantity, price }) => { 
+        {console.log("mapped")}   
+
+        return <tr key={id}>  
+        <td >{name}</td>  
+        <td>{quantity}</td>
+        <td >${price}</td>   
+     
+        </tr>    
+
+
+        }) 
+    } 
 
     const renderProducts = () =>{
         console.log("render products");
         
-        return products.map(({ id1, name, price }) => { 
+        return products.map(({ id, name, price }) => { 
         {console.log("mapped")}   
 
-        return <tr key={id1} >  
+        return <tr key={id} onClick={(event) => {onClickAddItem(name, price)}}>  
         <td >{name}</td>  
         <td >{price}</td>   
      
@@ -136,37 +163,31 @@ function Customer ({par}){
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="2">Current Order</th>
+                            <th colSpan="3">Current Order</th>
                             </tr>
                             <tr > 
                             <th>Product</th>  
                             <th>Quantity</th> 
+                            <th> Price </th>
                             </tr>  
                         </thead>    
                         <tbody> 
-                            <tr>
-                            <td>Steamed Juntunen</td>
-                            <td>3</td>
-                            </tr>
-                            <tr>
-                            <td>Fried Egholm</td>
-                            <td>10</td>
-                            </tr>
-                        
-                        
-                        
-
-                        {/* {renderProducts()}     */}
+                        {renderOrders()}
                         </tbody>  
-                        <td>Price</td>
-                        <td>$ 14.00</td>
+                        <td colSpan="2" style={{fontWeight: 'bold', textAlign: 'center'}}>Total Price</td>
+                        <td id="total_price_div">$0.00</td>
                     </table>
+                    
                 </div>
 
                 <div className="addtoorder">
-                    <Dropdown className="dropdown" options={dd_options} placeholder="Select an option" />
+                    {/* <Dropdown className="dropdown" options={dd_options} placeholder="Select an option" /> */}
+                    <text id="order" className="order"> Selected Item: </text>
+                    <div id="selected_item" className="order">{}</div>
+                    <div id="selected_price" className="order">{}</div>
                     <input id="quantfield" placeholder="Quantity"></input>
-                    <button className="addtoorderbutton">Add to Order</button>
+                    <button className="addtoorderbutton" onClick={add_to_order}>Add Item to Order</button>
+                    <br></br><button className="addtoorderbutton" onClick={queryOrder}>Complete Order</button>
                 </div> 
             </div>
 
