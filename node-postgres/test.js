@@ -8,6 +8,24 @@ const pool = new Pool({
     port: 5432,
     ssl: {rejectUnauthorized: false}
 });
+//get orders function with a query
+
+const getOrders = async () => {
+    //test addorder
+    return new Promise(function(resolve, reject) {
+        pool.query('SELECT * FROM orders', (error, results) => {
+        if (error) {
+            console.log("bad");
+            reject(error)
+        }
+        //console.log(results.rows[0]['product_id']);
+        resolve(results.rows);
+        //console.log(results.rows[0]['description']);
+        })
+        
+        //console.log("here");
+    }) 
+}
 const addOrder = async (order) => { 
     id_list = "{";
     quant_list = "{";
@@ -112,7 +130,7 @@ const addOrder = async (order) => {
 const getProduct = async () => {
     //test addorder
     return new Promise(function(resolve, reject) {
-        pool.query('SELECT * FROM product', (error, results) => {
+        pool.query('SELECT * FROM product order by product_id', (error, results) => {
         if (error) {
             console.log("bad");
             reject(error)
@@ -157,7 +175,8 @@ const getIngredient = () => {
 
 module.exports = {
     getProduct,
-    addOrder
+    addOrder,
+    getOrders
 }
 // app.listen(process.env.PSQL_PORT, () => {
 //     console.log(`App server now listening to port ${process.env.PSQL_PORT}`);

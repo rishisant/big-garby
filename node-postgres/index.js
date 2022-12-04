@@ -35,9 +35,22 @@ app.post('/orders', (req, res) => {
     res.status(500).send(error);
   })  
 })
+app.get('/get_orders', (req, res) => {
+  product_test.getOrders()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).send(error);
+  })
+})
+
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
+
 
 // app.post('/merchants', (req, res) => {
 //   merchant_model.createMerchant(req.body)

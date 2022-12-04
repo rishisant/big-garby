@@ -60,6 +60,18 @@ function EnterOrderS ({par}){
         var desc = document.getElementById("selected_item").innerHTML;
         var item_price = (document.getElementById("selected_price").innerHTML);
         var quant = parseFloat(document.getElementById("quantfield").value);
+        if (quant == 0){
+            alert("Please enter a quantity.");
+            return;
+        }
+        else if (quant < 0){
+            alert("Please enter a positive quantity.");
+            return;
+        }
+        else if (isNaN(quant)){
+            alert("Please enter a valid quantity.");
+            return;
+        }
         let new_order = [ ...order];
         //get just the number from the price
         console.log("item_price1: " + item_price);
