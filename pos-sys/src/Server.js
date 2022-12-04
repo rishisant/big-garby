@@ -81,8 +81,8 @@ function App() {
     return (
         <div id="homecontainer">
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/EnterOrder')}>Enter Order</div>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/ViewOrders')}>View Orders/Inventory</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/EnterOrderS')}>Enter Order</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/ViewOrders')}>View Orders</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ContactManager')}>Contact Manager</div>
             {/* <div class="homebutton" id="admin_panel" onClick={print_All_Vals}>Print all vals Console</div> */}
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>

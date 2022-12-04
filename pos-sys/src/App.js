@@ -15,6 +15,9 @@ import ContactManager from "./ContactManager";
 import Test_Click from "./Test_Click";
 import GoogleMaps from "./GoogleMaps";
 import EnterOrder from "./EnterOrder";
+import ViewReports from "./ViewReports";
+import ViewOrdersInt from "./ViewOrdersInt";
+import EnterOrderS from "./EnterOrderS";
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
         <Route exact path="/Test_Click" element = {<Test_Click/>}/>
         <Route exact path="/GoogleMaps" element = {<GoogleMaps/>}/>
         <Route exact path="/EnterOrder" element = {<EnterOrder/>}/>
+        <Route exact path="/ViewReports" element = {<ViewReports/>}/>
+        <Route exact path="/ViewOrdersInt" element = {<ViewOrdersInt/>}/>
+        <Route exact path="/EnterOrderS" element = {<EnterOrderS/>}/>
       </Routes>
     </BrowserRouter>
     </>

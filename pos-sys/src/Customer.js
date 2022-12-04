@@ -146,6 +146,20 @@ function Customer ({par}){
 
         }) 
     } 
+
+    const containerStyle = {
+        // center both tables and make them display next to each other (flex row)
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: '20px',
+        marginBottom: '20px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '100%',
+        height: '100%',
+    };
+
     //console.log("starting html");
     // getProduct(t);
     const[state, setState] = React.useState(INITIAL_STATE);
@@ -162,8 +176,7 @@ function Customer ({par}){
         {/* The strings that we pull for query functions */}
         <div id="test_query_string" style={{visibility: 'hidden', fontSize: '0.1px' }}></div>
         <div id="test_query_string1" style={{visibility: 'hidden', fontSize: '0.1px' }}></div>
-        <div className="tablecontainer">
-            <div id="flexrow">
+        <div className="tablecontainer" style={containerStyle}>
                 <div id="tablediv">
                     <table className="table_s" > 
                         <thead>
@@ -212,9 +225,7 @@ function Customer ({par}){
                     <input id="quantfield" placeholder="Quantity"></input>
                     <button className="addtoorderbutton" onClick={add_to_order}>Add Item to Order</button>
                     <br></br><button className="addtoorderbutton" onClick={queryOrder}>Complete Order</button>
-                </div> 
-            </div>
-
+                </div>
                 
         </div>
 
