@@ -1,14 +1,4 @@
-// const express = require('express')
-// const app = express()
-// const port = 3001
 
-// app.get('/', (req, res) => {
-//   res.status(200).send('Hello World!');
-// })
-
-// app.listen(port, () => {
-//   console.log(`App running on port ${port}.`)
-// })
 const express = require('express')
 const app = express()
 const port = 3001
@@ -23,8 +13,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => {
-  
+app.get('/products', (req, res) => {
   product_test.getProduct()
   
   .then(response => {
@@ -35,6 +24,16 @@ app.get('/', (req, res) => {
     console.log(error);
     res.status(500).send(error);
   })
+})
+app.post('/orders', (req, res) => {
+  product_test.addOrder(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).send(error);
+  })  
 })
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
