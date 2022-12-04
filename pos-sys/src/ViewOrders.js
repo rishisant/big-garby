@@ -25,6 +25,7 @@ function ViewOrder (){
         "Products",
         "Price",
         "Date",
+        "Quantity",
     ];
 
     const [translatedTextList, setTranslatedTextList] = React.useState([]);
@@ -74,8 +75,26 @@ function ViewOrder (){
                             product_ids_string += ", ";
                         }
                     }
-                    newOrders.push({id: i, order_num: res[i].order_num, name: product_ids_string, price: "$" + String(res[i].total_price), data: res[i].date});
-                    console.log(res[i].product_ids);
+                    //split the product quantity array into a string with commas
+                    var product_quantities = res[i].quantity;
+                    var product_quantities_string = "";
+                    if (product_quantities!= null){
+                        for (var j = 0; j < product_quantities.length; j++){
+                            product_quantities_string += product_quantities[j];
+                            if (j != product_quantities.length - 1){
+                                product_quantities_string += ", ";
+                            }
+                        }
+                    }
+                    //remove t and z from date
+                    var date = res[i].date;
+                    date = date.replace("T", " ");
+                    date = date.replace("Z", "");
+                    //remove the last 4 characters from the date
+                    date = date.substring(0, date.length - 4);
+                    console.log(res[i].date);
+                    newOrders.push({id: i, order_num: res[i].order_num, name: product_ids_string, quant: product_quantities_string, price: "$" + String(res[i].total_price), date: date});
+                    console.log(res[i].quantity);
                 }
                 setOrders(newOrders);
 
@@ -123,35 +142,16 @@ function ViewOrder (){
     };
     //render orders function
     const renderOrders = () =>{
-        return orders.map(({ id, order_num, name, price, date }) => {
+        return orders.map(({ id, order_num, name, quant, price, date }) => {
         return <tr key={id}>  
             <td>{order_num}</td>
-            <td >{name}</td>  
+            <td >{name}</td> 
+            <td>{quant}</td> 
             <td >{price}</td>   
             <td >{date}</td>
         </tr>    
         });
     } 
-    //function to pair the product id with the product name
-    const pairProduct = () => {
-        //console.log("started pairProduct", orders);
-        for (var i = 0; i < IS_orders.length; i++){
-            for (var k = 0; k < IS_orders.name.length; k++){
-                
-                for (var j = 0; j < IS_products.length; j++){
-                    if (IS_orders[i].name[k] == IS_products[j].product_id){
-                        IS_ids.push(IS_products[j].name);
-                    }
-                    //console.log("finished pairProduct");
-                }
-            }
-        }
-        //replace the product id with the product name in the IS_orders array
-        for (var i = 0; i < IS_orders.length; i++){
-            IS_orders[i].name = IS_ids[i];
-        }
-        //console.log(IS_ids);
-    }
     
 
     const navigate = useNavigate();
@@ -183,11 +183,12 @@ function ViewOrder (){
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="4">{translatedTextList[7]}</th>
+                            <th colSpan="5">{translatedTextList[7]}</th>
                             </tr>
                             <tr > 
                             <th>{translatedTextList[8]}</th> 
-                            <th>{translatedTextList[9]}</th>  
+                            <th>{translatedTextList[9]}</th> 
+                            <th>{translatedTextList[12]}</th> 
                             <th>{translatedTextList[10]}</th>
                             <th>{translatedTextList[11]}</th>
                             </tr>  
