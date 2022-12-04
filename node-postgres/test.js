@@ -177,11 +177,7 @@ const getProduct = async () => {
 }
 
 
-module.exports = {
-    getProduct,
-    addOrder,
-    getOrders
-}
+
 // app.listen(process.env.PSQL_PORT, () => {
 //     console.log(`App server now listening to port ${process.env.PSQL_PORT}`);
 // });
@@ -195,3 +191,33 @@ module.exports = {
 //         }
 //     });
 // });
+
+// google translate API
+const {Translate} = require('@google-cloud/translate').v2;
+const TRANSLATE_KEY = "AIzaSyCqejAxyPau3Af0EqN-hmLL2WGiPjV5Lf8";
+
+const translateText = async (req, res, next) => {
+    const targetLanguage = req.body.targetLanguage;
+    const text = req.body.text;
+    const translate = new Translate({key: TRANSLATE_KEY});
+
+    console.log('target language is ' + targetLanguage);
+    console.log('text is ' + text);
+
+    try {
+        let [response] = await translate.translate(text, targetLanguage);
+        console.log('translation is successful');
+        res.status(200).json(response);
+    } catch (error) {
+        console.log('translation failed');
+        res.status(500).json(error);
+    }
+}
+
+module.exports = {
+    getProduct,
+    addOrder,
+    getOrders,
+    getIngredient,
+    translateText
+}

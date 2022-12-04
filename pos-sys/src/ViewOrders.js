@@ -5,10 +5,41 @@ import './TableStyle.css';
 import { print_All_Vals, products, ingredients, prices } from './Server';
 import { initVals } from './Home';
 import {useNavigate} from 'react-router-dom';
-
+// import { getProduct } from '../../node-postgres/test';
+import {translate} from './HomeFunctions';
 
 function ViewOrder (){
-  
+    const currentLang = localStorage.getItem('lang', 'en');
+    console.log('currentLang: ' + currentLang);
+    const targetLanguage = currentLang;
+    const textList = [
+        "Click on the period of time you would like to view orders for by selecting an option from the dropdown menu.",
+        "Today",
+        "Since Last Week",
+        "Since Last Month",
+        "Since Last Year",
+        "All Time",
+        "Submit Request",
+        "All Orders",
+        "Order ID",
+        "Products",
+        "Price",
+        "Date",
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
+    }, []);
     var mounted = false;
     useEffect(() => {
         if (mounted == false){
@@ -128,25 +159,18 @@ function ViewOrder (){
         <div>
           <img id="mainlogo3" src={require('./components/img/hss_transparent.png')} style={{cursor: 'pointer'}} onClick={()=> navigate('/Server')} alt="Logo"></img>
                 <div className="textbut1">
-                Click on the period of time you would like to view orders for by selecting an option from the dropdown menu.
+                {translatedTextList[0]}
                 </div>
                 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
-
-
-                <select id="ordertype" style={dropdownStyle}>
-                    <option value="completed">Completed Orders</option>
-                    <option value="inprogress">In Progress Orders</option>
-                    <option value="all">All Orders</option>
-                </select>
                 
 
                 <select id="timeperiod" style={dropdownStyle} name="timeperiod">
-                    <option value="today">Today</option>
-                    <option value="lweek">Since Last Week</option>
-                    <option value="lmonth">Since Last Month</option>
-                    <option value="lyear">Since Last Year</option>
-                    <option value="alltime">All Time</option>
+                    <option value="today">{translatedTextList[1]}</option>
+                    <option value="lweek">{translatedTextList[2]}</option>
+                    <option value="lmonth">{translatedTextList[3]}</option>
+                    <option value="lyear">{translatedTextList[4]}</option>
+                    <option value="alltime">{translatedTextList[5]}</option>
                 </select>
 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
@@ -159,13 +183,13 @@ function ViewOrder (){
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="4">All Orders</th>
+                            <th colSpan="4">{translatedTextList[7]}</th>
                             </tr>
                             <tr > 
-                            <th>Order ID</th> 
-                            <th>Products</th>  
-                            <th>Price</th>
-                            <th>Date</th>
+                            <th>{translatedTextList[8]}</th> 
+                            <th>{translatedTextList[9]}</th>  
+                            <th>{translatedTextList[10]}</th>
+                            <th>{translatedTextList[11]}</th>
                             </tr>  
                         </thead>    
                         <tbody> 

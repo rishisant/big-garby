@@ -46,6 +46,16 @@ app.get('/get_orders', (req, res) => {
   })
 })
 
+app.post('/translate', (req, res) => {
+  product_test.translateText(req, res)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).send(error);
+  })
+})
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)

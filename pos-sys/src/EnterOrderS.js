@@ -6,9 +6,44 @@ import {raise_admin_bar} from './HomeFunctions';
 import Dropdown from 'react-dropdown';
 import {products, prices, ingredients, print_All_Vals} from './Home';
 import {initValsTiny} from './Home';
+import {translate} from './HomeFunctions';
+
 var total_price = 0.0;
 var completedOrder = [];
 function EnterOrderS ({par}){
+    const currentLang = localStorage.getItem('lang', 'en');
+    console.log('currentLang: ' + currentLang);
+    const targetLanguage = currentLang;
+    const textList = [
+        "Enter any orders here that you would like to send to the kitchen. Note that each time you press send, a new order will be sent. Click on the logo to return back to the Server menu page.",
+        "Menu Items",
+        "Product",
+        "Price",
+        "Current Order",
+        "Product",
+        "Quantity",
+        "Price",
+        "Total Price",
+        "Selected Item",
+        "Add Item to Order",
+        "Send Order",
+        "Quantity",
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
+    }, []);
+
     var id_order = 0;
     
     var to_add = "howdy";
@@ -179,9 +214,7 @@ function EnterOrderS ({par}){
         <div>
         <img id="mainlogo3" style={{cursor: 'pointer'}} src={require('./components/img/hss_transparent.png')} onClick={()=>navigate('/Server')}  alt="Logo"></img>
         <div className="textbut1">
-            Enter any orders here that you would like to send to the kitchen. Note that each time you press send, a new order will be sent.
-                
-                Click on the logo to return back to the Server menu page.
+        {translatedTextList[0]}
         </div>
         {/* {console.log("Website creation begun")} */}
         <div style={{ margin: '50px' }}>
@@ -194,11 +227,11 @@ function EnterOrderS ({par}){
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="2">Menu Items</th>
+                            <th colSpan="2">{translatedTextList[1]}</th>
                             </tr>
                             <tr > 
-                            <th>Product</th>  
-                            <th>Price</th> 
+                            <th>{translatedTextList[2]}</th>  
+                            <th>{translatedTextList[3]}</th> 
                             </tr>  
                         </thead>    
                         <tbody> 
@@ -213,30 +246,30 @@ function EnterOrderS ({par}){
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="3">Current Order</th>
+                            <th colSpan="3">{translatedTextList[4]}</th>
                             </tr>
                             <tr > 
-                            <th>Product</th>  
-                            <th>Quantity</th> 
-                            <th> Price </th>
+                            <th>{translatedTextList[5]}</th>  
+                            <th>{translatedTextList[6]}</th> 
+                            <th>{translatedTextList[7]}</th>
                             </tr>  
                         </thead>    
                         <tbody> 
                         {renderOrders()}
                         </tbody>  
-                        <td colSpan="2" style={{fontWeight: 'bold', textAlign: 'center'}}>Total Price</td>
+                        <td colSpan="2" style={{fontWeight: 'bold', textAlign: 'center'}}>{translatedTextList[8]}</td>
                         <td id="total_price_div">$0.00</td>
                     </table>
                 </div>
 
                 <div className="addtoorder">
                     {/* <Dropdown className="dropdown" options={dd_options} placeholder="Select an option" /> */}
-                    <text id="order" className="order"> Selected Item: </text>
+                    <text id="order" className="order">{translatedTextList[9]}</text>
                     <div id="selected_item" className="order">{}</div>
                     <div id="selected_price" className="order">{}</div>
-                    <input id="quantfield" placeholder="Quantity"></input>
-                    <button className="addtoorderbutton" style={{fontSize: '15px'}} onClick={add_to_order}>Add Item to Order</button>
-                    <br></br><button className="addtoorderbutton" style={{fontSize: '15px'}} onClick={queryOrder}>Send Order</button>
+                    <input id="quantfield" placeholder={translatedTextList[12]}></input>
+                    <button className="addtoorderbutton" style={{fontSize: '15px'}} onClick={add_to_order}>{translatedTextList[10]}</button>
+                    <br></br><button className="addtoorderbutton" style={{fontSize: '15px'}} onClick={queryOrder}>{translatedTextList[11]}</button>
                 </div> 
 
                 
