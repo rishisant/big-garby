@@ -5,7 +5,7 @@ import './TableStyle.css';
 import { print_All_Vals, products, ingredients, prices } from './Server';
 import { initVals } from './Home';
 import {useNavigate} from 'react-router-dom';
-import { getProduct } from '../../node-postgres/test';
+
 
 function ViewOrder (){
   
