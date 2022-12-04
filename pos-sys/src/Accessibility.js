@@ -97,6 +97,7 @@ const Accessibility = () => {
         }
 
         else if (param1 == 3) {
+            localStorage.setItem('languagechosen', 'true');
             // have a language array
             const langs = ['en', 'es', 'fr', 'ja', 'zh-CN', 'zh-TW'];
             // get the current language

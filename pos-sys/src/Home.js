@@ -114,12 +114,20 @@ export const print_All_Vals = () => {
 }
 
 const Home = () => {
-    //localStorage.setItem( 'lang', 'en' );
-
-    const currentLang = localStorage.getItem('lang', 'en');
-    if(currentLang === null) {
+    // localStorage.setItem('lang', null);
+    const hasChosenLang = localStorage.getItem('languagechosen');
+    if (hasChosenLang != "true") {
         localStorage.setItem('lang', 'en');
     }
+
+    var currentLang = localStorage.getItem('lang', 'en');
+    if (currentLang == null) {
+        console.log("setting language to english");
+        localStorage.setItem('lang', 'en');
+    }
+
+    currentLang = localStorage.getItem('lang', 'en');
+    // if current lang isnt one of the langs, set it to english
     console.log('currentLang: ' + currentLang);
     const targetLanguage = currentLang;
 
