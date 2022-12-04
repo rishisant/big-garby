@@ -13,7 +13,6 @@ function ViewOrder (){
     useEffect(() => {
         if (mounted == false){
             getOrders();
-            //getProduct();
             initVals();
         }
         mounted = true;
@@ -35,36 +34,20 @@ function ViewOrder (){
         .then(res => {
             let newOrders = [ ...orders];
                 for (var i = 0; i < res.length; i++){
-                    newOrders.push({id: i, order_num: res[i].order_num, name: res[i].product_ids, price: "$" + String(res[i].total_price), data: res[i].date});
-                    IS_ids.push(res[i].product_ids);
+                    //split the product id array into a string with commas
+                    var product_ids = res[i].product_ids;
+                    var product_ids_string = "";
+                    for (var j = 0; j < product_ids.length; j++){
+                        product_ids_string += product_ids[j];
+                        if (j != product_ids.length - 1){
+                            product_ids_string += ", ";
+                        }
+                    }
+                    newOrders.push({id: i, order_num: res[i].order_num, name: product_ids_string, price: "$" + String(res[i].total_price), data: res[i].date});
                     console.log(res[i].product_ids);
                 }
                 setOrders(newOrders);
-                //pair the product ids with the product names from getProduct
-                // for (var i = 0; i < IS_ids.length; i++){
-                //     var temp = IS_ids[i];
-                //     var temp2 = [];
-                //     for (var j = 0; j < temp.length; j++){
-                //         temp2.push(products[temp[j]]);
-                //     }
-                //     IS_ids[i] = temp2;
-                // }
-                // console.log(IS_ids);
 
-        })
-        
-    }
-    const getProduct = async () => {
-        fetch('http://localhost:3001/products')
-        .then(res => res.json())
-        .then(res => {
-            let newProducts = [ ...products];
-                for (var i = 0; i < res.length; i++){
-                    newProducts.push({name: res[i].description, product_id: res[i].product_id});
-                }   
-                setProducts(newProducts);
-                console.log(newProducts);
-                getOrders();
         })
         
     }
