@@ -180,13 +180,13 @@ function ViewOrder (){
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
 
                 <div id="tablediv">
-                    <table className="table_s" > 
+                    <table className="table_s" width="1000" > 
                         <thead>
                             <tr>
                             <th colSpan="5">{translatedTextList[7]}</th>
                             </tr>
                             <tr > 
-                            <th>{translatedTextList[8]}</th> 
+                            <th width="100">{translatedTextList[8]}</th> 
                             <th>{translatedTextList[9]}</th> 
                             <th>{translatedTextList[12]}</th> 
                             <th>{translatedTextList[10]}</th>
