@@ -18,6 +18,7 @@ import EnterOrder from "./EnterOrder";
 import ViewReports from "./ViewReports";
 import ViewOrdersInt from "./ViewOrdersInt";
 import EnterOrderS from "./EnterOrderS";
+import ViewEmployees from "./ViewEmployees";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/ViewReports" element = {<ViewReports/>}/>
         <Route exact path="/ViewOrdersInt" element = {<ViewOrdersInt/>}/>
         <Route exact path="/EnterOrderS" element = {<EnterOrderS/>}/>
+        <Route exact path="/ViewEmployees" element = {<ViewEmployees/>}/>
       </Routes>
     </BrowserRouter>
     </>

@@ -20,7 +20,7 @@ const Manager = () => {
     return (
         <div id="homecontainer">
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/InDevelopment')}>View Employees</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/ViewEmployees')}>View Employees</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ViewOrdersInt')}>View Orders/Inventory</div>
             <div class="homebutton" id="to_order" onClick={() => navigate('/ViewReports')}>View Reports</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
