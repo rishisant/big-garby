@@ -165,7 +165,7 @@ function EnterOrderS ({par}){
     const[state, setState] = React.useState(INITIAL_STATE);
     return (
         <div>
-        <img id="mainlogo3" style={{cursor: 'pointer'}} src={require('./components/img/hss_transparent.png')} onClick={()=>navigate('/')}  alt="Logo"></img>
+        <img id="mainlogo3" style={{cursor: 'pointer'}} src={require('./components/img/hss_transparent.png')} onClick={()=>navigate('/Server')}  alt="Logo"></img>
         <div className="textbut1">
             Enter any orders here that you would like to send to the kitchen. Note that each time you press send, a new order will be sent.
                 
