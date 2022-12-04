@@ -9,11 +9,15 @@ import {useNavigate} from 'react-router-dom';
 
 function ViewOrder (){
   
-
+    var mounted = false;
     useEffect(() => {
+        if (mounted == false){
+            getOrders();
+            //getProduct();
+            initVals();
+        }
+        mounted = true;
         
-        getProduct();
-        initVals();
     }, []);
     var IS_orders = [];
     var IS_products = [];
@@ -22,16 +26,33 @@ function ViewOrder (){
     const [products, setProducts] = useState(IS_products);
     //fetch the getorders function from the server
     const getOrders = async () => {
-        console.log("started getOrders");
+        //console.log("started getOrders");
+        
+       
+        //await new Promise(resolve => setTimeout(resolve, 2000));
         fetch('http://localhost:3001/get_orders')
         .then(res => res.json())
         .then(res => {
             let newOrders = [ ...orders];
                 for (var i = 0; i < res.length; i++){
                     newOrders.push({id: i, order_num: res[i].order_num, name: res[i].product_ids, price: "$" + String(res[i].total_price), data: res[i].date});
+                    IS_ids.push(res[i].product_ids);
+                    console.log(res[i].product_ids);
                 }
                 setOrders(newOrders);
+                //pair the product ids with the product names from getProduct
+                // for (var i = 0; i < IS_ids.length; i++){
+                //     var temp = IS_ids[i];
+                //     var temp2 = [];
+                //     for (var j = 0; j < temp.length; j++){
+                //         temp2.push(products[temp[j]]);
+                //     }
+                //     IS_ids[i] = temp2;
+                // }
+                // console.log(IS_ids);
+
         })
+        
     }
     const getProduct = async () => {
         fetch('http://localhost:3001/products')
@@ -42,7 +63,10 @@ function ViewOrder (){
                     newProducts.push({name: res[i].description, product_id: res[i].product_id});
                 }   
                 setProducts(newProducts);
+                console.log(newProducts);
+                getOrders();
         })
+        
     }
     
 
@@ -85,26 +109,34 @@ function ViewOrder (){
     };
     //render orders function
     const renderOrders = () =>{
-        pairProduct();
         return orders.map(({ id, order_num, name, price, date }) => {
         return <tr key={id}>  
             <td>{order_num}</td>
             <td >{name}</td>  
-            <td >${price}</td>   
+            <td >{price}</td>   
             <td >{date}</td>
         </tr>    
         });
     } 
     //function to pair the product id with the product name
     const pairProduct = () => {
+        //console.log("started pairProduct", orders);
         for (var i = 0; i < IS_orders.length; i++){
-            for (var j = 0; j < IS_products.length; j++){
-                if (IS_orders[i].name == IS_products[j].name){
-                    IS_ids.push(IS_products[j].product_id);
+            for (var k = 0; k < IS_orders.name.length; k++){
+                
+                for (var j = 0; j < IS_products.length; j++){
+                    if (IS_orders[i].name[k] == IS_products[j].product_id){
+                        IS_ids.push(IS_products[j].name);
+                    }
+                    //console.log("finished pairProduct");
                 }
             }
         }
-        console.log(IS_ids);
+        //replace the product id with the product name in the IS_orders array
+        for (var i = 0; i < IS_orders.length; i++){
+            IS_orders[i].name = IS_ids[i];
+        }
+        //console.log(IS_ids);
     }
     
 
@@ -136,7 +168,7 @@ function ViewOrder (){
 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
                 
-                <div class="homebutton" id="load_order_request">Submit Request</div>
+                <div className="homebutton" id="load_order_request">Submit Request</div>
 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
 
