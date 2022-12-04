@@ -26,7 +26,7 @@ const ViewOrdersInt = () => {
         margin: '5px',
         marginTop: '25px',
         marginBottom: '20px',
-        width: '10%',
+        width: '20%',
         height: '25%',
         marginLeft: 'auto',
         marginRight: 'auto',
