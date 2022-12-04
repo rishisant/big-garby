@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@google-cloud/translate": "^7.0.4",
     "google-maps-react": "^2.0.6",
+    "react-dropdown": "^1.11.0",
+    "react-localstorage-hook": "^0.1.0",
     "react-table": "^7.8.0"
   }
 }

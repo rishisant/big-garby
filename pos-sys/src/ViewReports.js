@@ -5,8 +5,38 @@ import './TableStyle.css';
 import { print_All_Vals, products, ingredients, prices } from './Server';
 import { initVals } from './Home';
 import {useNavigate} from 'react-router-dom';
+import {translate} from './HomeFunctions';
 
 const ViewReports = () => {
+    const currentLang = localStorage.getItem('lang', 'en');
+    console.log('currentLang: ' + currentLang);
+    const targetLanguage = currentLang;
+    const textList = [
+        "Click on the type of report you would like to view and then click the button to view the report. Excess reports return a list of items that sold less than 10% of their inventory, restock reports return a list of items that need to be restocked, and sales reports return the sales by item from the order history.",
+        "Excess Report",
+        "Restock Report",
+        "Sales Report",
+        "Submit Request",
+        "Report",
+        "Items",
+        "Stock",
+        "Sales",
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
+    }, []);
+
     useEffect(() => {
         initVals();
     }, []);
@@ -62,24 +92,22 @@ const ViewReports = () => {
         <div>
           <img id="mainlogo3" src={require('./components/img/hss_transparent.png')} style={{cursor: 'pointer'}} onClick={()=> navigate('/Manager')} alt="Logo"></img>
                 <div className="textbut1">
-                Click on the type of report you would like to view and then click the button to view the report. Excess reports return a list of items that sold less
-                than 10% of their inventory, restock reports return a list of items that need to be restocked, and sales reports return the sales by item from
-                the order history.
+                {translatedTextList[0]}
                 </div>
                 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
 
 
                 <select id="reporttype" style={dropdownStyle}>
-                    <option value="excess">Excess Report</option>
-                    <option value="restock">Restock Report</option>
-                    <option value="sales">Sales Report</option>
+                    <option value="excess">{translatedTextList[1]}</option>
+                    <option value="restock">{translatedTextList[2]}</option>
+                    <option value="sales">{translatedTextList[3]}</option>
                 </select>
                 
 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
                 
-                <div class="homebutton" id="load_order_request">Submit Request</div>
+                <div class="homebutton" id="load_order_request">{translatedTextList[4]}</div>
 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
 
@@ -87,12 +115,12 @@ const ViewReports = () => {
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="3">Report</th>
+                            <th colSpan="3">{translatedTextList[5]}</th>
                             </tr>
                             <tr > 
-                            <th>Items</th>  
-                            <th>Stock</th> 
-                            <th>Sales</th>
+                            <th>{translatedTextList[6]}</th>  
+                            <th>{translatedTextList[7]}</th> 
+                            <th>{translatedTextList[8]}</th>
                             </tr>  
                         </thead>    
                         <tbody> 

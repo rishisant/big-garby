@@ -7,8 +7,34 @@ import './TableStyle.css';
 import { print_All_Vals, products, ingredients, prices } from './Server';
 import { initVals } from './Home';
 import {useNavigate} from 'react-router-dom';
+import {translate} from './HomeFunctions';
 
 const ViewEmployees = () => {
+    const currentLang = localStorage.getItem('lang', 'en');
+    console.log('currentLang: ' + currentLang);
+    const targetLanguage = currentLang;
+    const textList = [
+        "This is a list of all employees and their information.",
+        "All Employees",
+        "Name",
+        "Title",
+        "Date of Hire",
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
+    }, []);
+    
     useEffect(() => {
         initVals();
     }, []);
@@ -51,20 +77,12 @@ const ViewEmployees = () => {
         display: 'block',
     };
 
-
-    const send_To_Manager = () => {
-      // get the text from the text box
-      var text = document.getElementById("contmanager").value;
-      // empty the text box
-      document.getElementById("contmanager").value = "Message sent!";
-    }
-
     const navigate = useNavigate();
     return (
         <div>
           <img id="mainlogo3" src={require('./components/img/hss_transparent.png')} style={{cursor: 'pointer'}} onClick={()=> navigate('/Manager')} alt="Logo"></img>
                 <div className="textbut1">
-                This is a list of all employees and their information.
+                {translatedTextList[0]}
                 </div>
                 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
@@ -73,12 +91,12 @@ const ViewEmployees = () => {
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="3">All Employees</th>
+                            <th colSpan="3">{translatedTextList[1]}</th>
                             </tr>
                             <tr> 
-                            <th>Name</th>  
-                            <th>Title</th> 
-                            <th>Date of Hire</th>
+                            <th>{translatedTextList[2]}</th>  
+                            <th>{translatedTextList[3]}</th> 
+                            <th>{translatedTextList[4]}</th>
                             </tr>  
                         </thead>    
                         <tbody> 

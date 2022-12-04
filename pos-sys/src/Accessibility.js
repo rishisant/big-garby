@@ -7,8 +7,36 @@ import './AccessButtons.css';
 import {raise_admin_bar} from './HomeFunctions';
 import './components/img/hss_bw.png';
 import './components/img/subway_photo.png';
+import {translate} from './HomeFunctions';
 
 const Accessibility = () => {
+    localStorage.setItem('lang', 'en');
+    const currentLang = localStorage.getItem('lang');
+
+    console.log('currentLang: ' + currentLang);
+
+    const targetLanguage = currentLang;
+    const textList = [
+        "Please select which features you would like to enable. Click the logo to return back to the home page when complete. Note: Language changes do not take effect until you return to the home page.",
+        "Change Contrast",
+        "Larger Font Size",
+        "Current Language: " + currentLang.toUpperCase(),
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
+    }, []);
+
     const navigate = useNavigate();
     // make a function that permanently changes the stylesheet
     function buttonClick(param1) {
@@ -67,6 +95,26 @@ const Accessibility = () => {
                 
             }
         }
+
+        else if (param1 == 3) {
+            // have a language array
+            const langs = ['en', 'es', 'fr', 'ja', 'zh-CN', 'zh-TW'];
+            // get the current language
+            const currentLang = localStorage.getItem('lang');
+            // get the index of the current language
+            const index = langs.indexOf(currentLang);
+            // if the index is the last one, set the language to the first one
+            if (index == langs.length - 1) {
+                localStorage.setItem('lang', langs[0]);
+            }
+            // else, set the language to the next one
+            else {
+                localStorage.setItem('lang', langs[index + 1]);
+            }
+            // set the language button text to the new language
+            document.getElementById('accessbutton3').innerHTML = 'Current Language: ' + localStorage.getItem('lang').toUpperCase();
+
+        }
         return
     }
 
@@ -76,12 +124,14 @@ const Accessibility = () => {
              
                 <img id="mainlogo3" src={require('./components/img/hss_transparent.png')} style={{cursor: 'pointer'}} onClick={()=> navigate('/')} alt="Logo"></img>
                 <div className="textbut1">
-                Please select which features you would like to enable. Click the logo to return back to the home page when complete.
+                    {translatedTextList[0]}
+                
                 </div>
 
                 <div className="accesscontainer">
-                    <div className="accessbutton" id="accessbutton1" onClick={()=> buttonClick(1)}>Change Contrast</div>
-                    <div className="accessbutton" id="accessbutton2" onClick={()=> buttonClick(2)}>Higher Font Size</div>
+                    <div className="accessbutton" id="accessbutton1" onClick={()=> buttonClick(1)}>{translatedTextList[1]}</div>
+                    <div className="accessbutton" id="accessbutton2" onClick={()=> buttonClick(2)}>{translatedTextList[2]}</div>
+                    <div className="accessbutton" id="accessbutton3" onClick={()=> buttonClick(3)}>{translatedTextList[3]}</div>
                 </div>
                 
 

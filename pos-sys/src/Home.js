@@ -7,6 +7,11 @@ import React, { useEffect } from 'react';
 import './BaseStyle.css';
 // import {raise_admin_bar} from './HomeFunctions';
 import {raise_admin_bar} from './HomeFunctions';
+import {translate} from './HomeFunctions';
+import { useState } from 'react';
+
+// q: what should i download for react to get useLocalStorage?
+// a: npm install react-localstorage-hook
 
 // The arrays that will store all of our products, ingredients, etc. This will be fetched from the database.
 export var products = [];
@@ -109,6 +114,11 @@ export const print_All_Vals = () => {
 }
 
 const Home = () => {
+    // localStorage.setItem('lan << TEST'
+    const currentLang = localStorage.getItem('lang', 'en');
+    console.log('currentLang: ' + currentLang);
+    const targetLanguage = currentLang;
+
     const navigate = useNavigate();
     let vals;
     useEffect(() => {
@@ -117,6 +127,31 @@ const Home = () => {
     }, []);
     useEffect(() => {
         getIngredient();
+    }, []);
+
+    const textList = [
+        "Start Your Order",
+        "Admin Panel",
+        "ADMIN PANEL",
+        "MANAGER",
+        "SERVER",
+        "QUERY",
+        "ACCESSIBILITY",
+        "LOCATIONS"
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
     }, []);
 
     async function getProduct (){
@@ -165,22 +200,22 @@ const Home = () => {
             {() => getProduct()}
             {() => getIngredient()}
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
-            <div class="homebutton" id="to_order" onClick={() => navigate('/Customer')}>Start Your Order</div>
-            <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
+            <div class="homebutton" id="to_order" onClick={() => navigate('/Customer')}>{translatedTextList[0]}</div>
+            <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>{translatedTextList[1]}</div>
 
             <div id="adminpanel">
-                <panelbig>ADMIN PANEL</panelbig>
+                <panelbig>{translatedTextList[2]}</panelbig>
                 <img class="admin_button" id="managerlogo" src={require('./components/img/manager_transparent.png')} onClick={() => navigate('/AuthenticateM')} alt="Manager Logo"></img>
-                <paneltext>MANAGER</paneltext>
+                <paneltext>{translatedTextList[3]}</paneltext>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/server_transparent.png')} onClick={() => navigate('/AuthenticateS')} alt="Server Logo"></img>
-                <paneltext>SERVER</paneltext>
+                <paneltext>{translatedTextList[4]}</paneltext>
                 <img class="admin_button" id="querylogo" src={require('./components/img/query_transparent.png')} onClick={() => navigate('/QueryTest')} alt="Query Logo"></img>
-                <paneltext>QUERY</paneltext>
+                <paneltext>{translatedTextList[5]}</paneltext>
                 <img class="admin_button" id="accesslogo" src={require('./components/img/accessibility_transparent.png')} onClick={() => navigate('/Accessibility')} alt="Accessibility Logo"></img>
-                <paneltext>ACCESSIBILITY</paneltext>
+                <paneltext>{translatedTextList[6]}</paneltext>
 
                 <img class="admin_button" id="serverlogo" src={require('./components/img/googlemaps.png')} onClick={() => navigate('/GoogleMaps')} alt="Map Logo"></img>
-                <paneltext>LOCATIONS</paneltext>
+                <paneltext>{translatedTextList[7]}</paneltext>
 
                 
                 {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}

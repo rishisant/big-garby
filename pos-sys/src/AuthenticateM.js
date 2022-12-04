@@ -10,12 +10,41 @@ import {useEffect} from 'react';
 // import {raise_admin_bar} from './HomeFunctions';
 import {initVals} from './Home';
 import {raise_admin_bar} from './HomeFunctions';
+import {translate} from './HomeFunctions';
 // import { isValidManager } from './AuthentScript';
 
 const AuthenticateM = () => {
+    const currentLang = localStorage.getItem('lang', 'en');
+    console.log('currentLang: ' + currentLang);
+    const targetLanguage = currentLang;
+    const textList = [
+        "Input Username",
+        "Input Password",
+        "Authenticate",
+        "Admin Panel",
+        "ADMIN PANEL",
+        "ACCESSIBILITY",
+        "RETURN HOME",
+        "Invalid Manager. Please try again.",
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
+    }, []);
+
     const navigate = useNavigate();
-    var validusers = ["rishisanthanam", "mattjuntunen", "esbenegholm", "nayabrehmat"];
-    var validpass = ["529009921", "630007600", "228007063", "528000730"];   
+    var validusers = ["rishisanthanam", "mattjuntunen", "esbenegholm", "nayabrehmat", "admin"];
+    var validpass = ["529009921", "630007600", "228007063", "528000730", "namu"];   
     useEffect(() => {
         initVals();
     }, []);
@@ -33,12 +62,11 @@ const AuthenticateM = () => {
             }
         }
         if (isvalid) {
-            console.log("Valid Manager");
             // navigate to manager
             navigate('/Manager');
         }
         else {
-            console.log("Invalid Manager");
+            alert(translatedTextList[7]);
         }
     }
     
@@ -46,20 +74,20 @@ const AuthenticateM = () => {
         <div id="homecontainer">
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
             <div id="authcontainer">
-                <input type="text" class="authfield" id="username_field" defaultValue="Input Username" name="fname"></input>
-                <input type="text" class="authfield" id="password_field" defaultValue="Input Password" name="fname"></input>
+                <input type="text" class="authfield" id="username_field" placeholder={translatedTextList[0]} name="fname"></input>
+                <input type="text" class="authfield" id="password_field" placeholder={translatedTextList[1]} name="fname"></input>
             </div>
             <div id="authspacer"></div>
-            <div class="homebutton" id="check_auth" onClick={isValidManager}>Authenticate</div>
+            <div class="homebutton" id="check_auth" onClick={isValidManager}>{translatedTextList[2]}</div>
             <div id="authspacer"></div>
-            <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>Admin Panel</div>
+            <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>{translatedTextList[3]}</div>
 
             <div id="adminpanel">
-                <panelbig>ADMIN PANEL</panelbig>
+                <panelbig>{translatedTextList[4]}</panelbig>
                 <img class="admin_button" id="accesslogo" src={require('./components/img/accessibility_transparent.png')} onClick={() => navigate('/Accessibility')} alt="Accessibility Logo"></img>
-                <paneltext>ACCESSIBILITY</paneltext>
+                <paneltext>{translatedTextList[5]}</paneltext>
                 <img class="admin_button" id="serverlogo" src={require('./components/img/home_transparent.png')} onClick={() => navigate('/')} alt="Home Logo"></img>
-                <paneltext>RETURN HOME</paneltext>
+                <paneltext>{translatedTextList[6]}</paneltext>
                 {/* <img class="admin_button" id="reportslogo" src={require('./components/img/reports_transparent.png')}></img> */}
             </div>
         </div>

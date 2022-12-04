@@ -8,8 +8,46 @@ import './TableStyle.css';
 import { print_All_Vals, products, ingredients, prices } from './Server';
 import { initVals } from './Home';
 import {useNavigate} from 'react-router-dom';
+import {translate} from './HomeFunctions';
 
 const ViewOrdersInt = () => {
+    const currentLang = localStorage.getItem('lang', 'en');
+    console.log('currentLang: ' + currentLang);
+    const targetLanguage = currentLang;
+    const textList = [
+        "Click on the period of time you would like to view orders for by selecting an option from the dropdown menu. The inventory can be viewed by clicking on the inventory button.",
+        "View Orders",
+        "View Inventory",
+        "Today",
+        "Since Last Week",
+        "Since Last Month",
+        "Since Last Year",
+        "All Time",
+        "Submit Request",
+        "All Orders",
+        "Products",
+        "Progress",
+        "Price",
+        "Date",
+        "All Inventory",
+        "Items",
+        "Stock",
+    ];
+
+    const [translatedTextList, setTranslatedTextList] = React.useState([]);
+
+    useEffect(() => {
+        async function trans() {
+            const transList = [];
+            for (let i = 0; i < textList.length; i++) {
+                let translatedText = await translate(textList[i], targetLanguage);
+                transList.push(translatedText);
+            }
+            setTranslatedTextList(transList);
+        }
+        trans();
+    }, []);
+
     useEffect(() => {
         initVals();
     }, []);
@@ -72,35 +110,27 @@ const ViewOrdersInt = () => {
         <div>
           <img id="mainlogo3" src={require('./components/img/hss_transparent.png')} style={{cursor: 'pointer'}} onClick={()=> navigate('/Manager')} alt="Logo"></img>
                 <div className="textbut1">
-                Click on the period of time you would like to view orders for by selecting an option from the dropdown menu. You can also view the inventory
-                by selecting the "View Inventory" option.
+                {translatedTextList[0]}
                 </div>
                 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
 
                 <select id="orderorinventory" style={dropdownStyle}>
-                    <option value="orders">View Orders</option>
-                    <option value="inventory">View Inventory</option>
+                    <option value="orders">{translatedTextList[1]}</option>
+                    <option value="inventory">{translatedTextList[2]}</option>
                 </select>
-
-                <select id="ordertype" style={dropdownStyle}>
-                    <option value="completed">Completed Orders</option>
-                    <option value="inprogress">In Progress Orders</option>
-                    <option value="all">All Orders</option>
-                </select>
-                
 
                 <select id="timeperiod" style={dropdownStyle} name="timeperiod">
-                    <option value="today">Today</option>
-                    <option value="lweek">Since Last Week</option>
-                    <option value="lmonth">Since Last Month</option>
-                    <option value="lyear">Since Last Year</option>
-                    <option value="alltime">All Time</option>
+                    <option value="today">{translatedTextList[3]}</option>
+                    <option value="lweek">{translatedTextList[4]}</option>
+                    <option value="lmonth">{translatedTextList[5]}</option>
+                    <option value="lyear">{translatedTextList[6]}</option>
+                    <option value="alltime">{translatedTextList[7]}</option>
                 </select>
 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
                 
-                <div class="homebutton" id="load_order_request">Submit Request</div>
+                <div class="homebutton" id="load_order_request">{translatedTextList[8]}</div>
 
                 <div id="spacer" style={{marginBottom: '5px', visibility: 'hidden'}}>ss</div>
 
@@ -110,13 +140,13 @@ const ViewOrdersInt = () => {
                         <table className="table_s" > 
                             <thead>
                                 <tr>
-                                <th colSpan="4">All Orders</th>
+                                <th colSpan="4">{translatedTextList[9]}</th>
                                 </tr>
                                 <tr > 
-                                <th>Products</th>  
-                                <th>Progress</th> 
-                                <th>Price</th>
-                                <th>Date</th>
+                                <th>{translatedTextList[10]}</th>  
+                                <th>{translatedTextList[11]}</th> 
+                                <th>{translatedTextList[12]}</th>
+                                <th>{translatedTextList[13]}</th>
                                 </tr>  
                             </thead>    
                             <tbody> 
@@ -137,11 +167,11 @@ const ViewOrdersInt = () => {
                     <table className="table_s" > 
                         <thead>
                             <tr>
-                            <th colSpan="2">All Inventory</th>
+                            <th colSpan="2">{translatedTextList[14]}</th>
                             </tr>
                             <tr > 
-                            <th>Items</th>  
-                            <th>Stock</th> 
+                            <th>{translatedTextList[15]}</th>  
+                            <th>{translatedTextList[16]}</th> 
                             </tr>  
                         </thead>    
                         <tbody> 
