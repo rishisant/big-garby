@@ -62,7 +62,7 @@ const ViewEmployees = () => {
     const navigate = useNavigate();
     return (
         <div>
-          <img id="mainlogo3" src={require('./components/img/hss_transparent.png')} style={{cursor: 'pointer'}} onClick={()=> navigate('/Server')} alt="Logo"></img>
+          <img id="mainlogo3" src={require('./components/img/hss_transparent.png')} style={{cursor: 'pointer'}} onClick={()=> navigate('/Manager')} alt="Logo"></img>
                 <div className="textbut1">
                 This is a list of all employees and their information.
                 </div>
