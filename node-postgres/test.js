@@ -218,6 +218,6 @@ module.exports = {
     getProduct,
     addOrder,
     getOrders,
-    getIngredient,
+    
     translateText
 }
