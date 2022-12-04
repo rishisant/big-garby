@@ -20,10 +20,14 @@ function Customer ({par}){
     ];
     
     var t = "";
+    var mounted = false;
     useEffect(() => {
-        getProduct();
-        initValsTiny();
-
+        if (mounted == false){
+            getProduct();
+            initValsTiny();
+        }
+        mounted = true;
+    
     }, []); 
     var count = 0;
     let test;
@@ -34,7 +38,7 @@ function Customer ({par}){
     
     const getProduct = async (t)=> {
         console.log("started getproduct");  
-        fetch('http://localhost:3001')
+        fetch('http://localhost:3001/products')
         .then(res => res.json())
         .then(res => {   
             //console.log("About to get info from query");
@@ -44,10 +48,10 @@ function Customer ({par}){
                 }
                 setProducts(newProducts);
             
-            console.log("End of getProduct");
+            //console.log("End of getProduct");
 
         })
-        console.log("x")
+        //console.log("x")
 
     }
 
@@ -58,26 +62,40 @@ function Customer ({par}){
         var quant = parseFloat(document.getElementById("quantfield").value);
         let new_order = [ ...order];
         item_price = parseFloat(item_price.substring(1));
-        // console.log("item price: " + item_price);
-        // console.log("quant: " + quant);
-        // console.log("total price: " + total_price);
         new_order.push({id: id_order, name: desc, quantity: quant, price: (parseFloat(item_price)*parseFloat(quant)).toFixed(2)});
         setOrder(new_order);
         id_order++;
         total_price = parseFloat(total_price) + parseFloat(quant * (item_price));
-        //console.log("total price2: " + total_price);
         total_price = total_price.toFixed(2);
         document.getElementById("total_price_div").innerHTML = "$" + String(total_price);
-        for (var i = 0; i < quant; i++){
-            completedOrder.push({name: desc, quantity: quant, price: (parseFloat(item_price)*parseFloat(quant)).toFixed(2)});
-        }
-        //console.log("completed order: " + completedOrder);
-
+        
+        completedOrder.push({name: desc, quantity: quant, price: (parseFloat(item_price)*parseFloat(quant)).toFixed(2)});
+        
     }
 
     const queryOrder = () => {
-        console.log("started queryOrder");
-        console.log(completedOrder);
+        fetch ('http://localhost:3001/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(completedOrder)
+        })
+        .then(res => {
+            return res.text();
+        })
+        .then(data => {
+            //alert(data);
+            getProduct();
+        });
+        //clear current order table
+        let new_order = [ ...order];
+        new_order = [];
+        setOrder(new_order);
+        total_price = 0.0;
+        document.getElementById("total_price_div").innerHTML = "$" + String(total_price);
+        completedOrder = [];
+
     }
 
     const onClickAddItem = (name, price) => {
@@ -87,14 +105,17 @@ function Customer ({par}){
         div.innerHTML = name;
         var div2 = document.getElementById("selected_price")
         div2.innerHTML = "$" + String(price);
-        console.log(name, price)
+        //clear the quantity field
+        
+
+        //console.log(name, price)
     }
 
     const renderOrders = () =>{
 
         
         return order.map(({ id, name, quantity, price }) => { 
-        {console.log("mapped")}   
+        
 
         return <tr key={id}>  
         <td >{name}</td>  
@@ -108,10 +129,10 @@ function Customer ({par}){
     } 
 
     const renderProducts = () =>{
-        console.log("render products");
+        
         
         return products.map(({ id, name, price }) => { 
-        {console.log("mapped")}   
+        
 
         return <tr key={id} onClick={(event) => {onClickAddItem(name, price)}}>  
         <td >{name}</td>  
@@ -122,7 +143,7 @@ function Customer ({par}){
 
         }) 
     } 
-    console.log("starting html");
+    //console.log("starting html");
     // getProduct(t);
     const[state, setState] = React.useState(INITIAL_STATE);
     return (
