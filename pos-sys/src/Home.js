@@ -114,8 +114,12 @@ export const print_All_Vals = () => {
 }
 
 const Home = () => {
-    // localStorage.setItem('lan << TEST'
+    //localStorage.setItem( 'lang', 'en' );
+
     const currentLang = localStorage.getItem('lang', 'en');
+    if(currentLang === null) {
+        localStorage.setItem('lang', 'en');
+    }
     console.log('currentLang: ' + currentLang);
     const targetLanguage = currentLang;
 
@@ -125,9 +129,7 @@ const Home = () => {
         getProduct();
         initVals();
     }, []);
-    useEffect(() => {
-        getIngredient();
-    }, []);
+
 
     const textList = [
         "Start Your Order",
@@ -160,7 +162,7 @@ const Home = () => {
         console.log("Getting products...");
         // NOTE for matt: Change this back to localhost:3001/products ...
         // CHANGED IT BECAUSE NEED TO COMPILE SITE
-        const response = await fetch('http://localhost:3001');
+        const response = await fetch('http://localhost:3001/products');
         if (!response.ok) {
             throw new Error ('HTTP error! status: ' + response.status);
         }
@@ -175,22 +177,6 @@ const Home = () => {
         console.log("Home product: " + products);
     }
     
-    const getIngredient = async () => {
-        // remove all elements from ingredients array
-        // NOTE for matt: Change this back to localhost:3001/ingredients ...
-        // CHANGED IT BECAUSE NEED TO COMPILE SITE
-        ingredients = [];
-        console.log("Getting ingredients...");
-        const response = await fetch('http://localhost:3001');
-        if (!response.ok) {
-            throw new Error ('HTTP error! status: ' + response.status);
-        }
-        vals = await response.json();
-        for (let i = 0; i < vals.length; i++) {
-            ingredients.push(vals[i].description);
-            // console.log("Ingredient: " + ingredients[i]);
-        }
-    }
     
 
     
@@ -198,7 +184,7 @@ const Home = () => {
         <div id="homecontainer">
             
             {() => getProduct()}
-            {() => getIngredient()}
+         
             <img id="mainlogo" src={require('./components/img/hss_transparent.png')} alt="Logo"></img>
             <div class="homebutton" id="to_order" onClick={() => navigate('/Customer')}>{translatedTextList[0]}</div>
             <div class="homebutton" id="admin_panel" onClick={raise_admin_bar}>{translatedTextList[1]}</div>
