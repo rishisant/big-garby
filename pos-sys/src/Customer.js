@@ -44,7 +44,7 @@ function Customer ({par}){
             //console.log("About to get info from query");
                 let newProducts = [ ...products];
                 for (var i = 0; i < res.length; i++){
-                    newProducts.push({id: i, name: res[i].description, price: res[i].price});
+                    newProducts.push({id: i, name: res[i].description, price: "$" + String(res[i].price)});
                 }
                 setProducts(newProducts);
             
@@ -61,7 +61,10 @@ function Customer ({par}){
         var item_price = (document.getElementById("selected_price").innerHTML);
         var quant = parseFloat(document.getElementById("quantfield").value);
         let new_order = [ ...order];
+        //get just the number from the price
+        console.log("item_price1: " + item_price);
         item_price = parseFloat(item_price.substring(1));
+        console.log("item_price: " + item_price);
         new_order.push({id: id_order, name: desc, quantity: quant, price: (parseFloat(item_price)*parseFloat(quant)).toFixed(2)});
         setOrder(new_order);
         id_order++;
@@ -92,8 +95,8 @@ function Customer ({par}){
         let new_order = [ ...order];
         new_order = [];
         setOrder(new_order);
-        total_price = 0.0;
-        document.getElementById("total_price_div").innerHTML = "$" + String(total_price);
+        total_price = 0.00;
+        document.getElementById("total_price_div").innerHTML = "$" + "0.00";
         completedOrder = [];
 
     }
@@ -104,7 +107,7 @@ function Customer ({par}){
         var div = document.getElementById("selected_item")
         div.innerHTML = name;
         var div2 = document.getElementById("selected_price")
-        div2.innerHTML = "$" + String(price);
+        div2.innerHTML = String(price);
         //clear the quantity field
         
 
