@@ -62,14 +62,10 @@ function Customer ({par}){
         var quant = parseFloat(document.getElementById("quantfield").value);
         let new_order = [ ...order];
         item_price = parseFloat(item_price.substring(1));
-        // console.log("item price: " + item_price);
-        // console.log("quant: " + quant);
-        // console.log("total price: " + total_price);
         new_order.push({id: id_order, name: desc, quantity: quant, price: (parseFloat(item_price)*parseFloat(quant)).toFixed(2)});
         setOrder(new_order);
         id_order++;
         total_price = parseFloat(total_price) + parseFloat(quant * (item_price));
-        //console.log("total price2: " + total_price);
         total_price = total_price.toFixed(2);
         document.getElementById("total_price_div").innerHTML = "$" + String(total_price);
         
@@ -89,7 +85,7 @@ function Customer ({par}){
             return res.text();
         })
         .then(data => {
-            alert(data);
+            //alert(data);
             getProduct();
         });
         //clear current order table
@@ -99,7 +95,7 @@ function Customer ({par}){
         total_price = 0.0;
         document.getElementById("total_price_div").innerHTML = "$" + String(total_price);
         completedOrder = [];
-        
+
     }
 
     const onClickAddItem = (name, price) => {
@@ -109,6 +105,9 @@ function Customer ({par}){
         div.innerHTML = name;
         var div2 = document.getElementById("selected_price")
         div2.innerHTML = "$" + String(price);
+        //clear the quantity field
+        
+
         //console.log(name, price)
     }
 
